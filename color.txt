@@ -1,0 +1,6 @@
+primary --->  #62ab00
+secondary----> #bd0018
+text ---> #333333
+
+
+theme inspiration ---> https://preview.themeforest.net/item/smartbooks-responsive-book-store-ecommerce-bootstrap-4-template/full_screen_preview/23493015
