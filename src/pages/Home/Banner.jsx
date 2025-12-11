@@ -6,16 +6,16 @@ const Banner = () => {
   return (
     <Carousel
       autoPlay={true}
-      interval={2000}
+      interval={2800}
       infiniteLoop={true}
       showThumbs={false}
     >
       <div className="flex items-center">
         <div className="flex-1 space-y-4">
-          <h1 className="text-3xl font-bold text-[#bd0018]">
+          <h1 className="text-xl lg:text-3xl font-bold text-[#bd0018]">
             Connect With 100+ Libraries
           </h1>
-          <p className="text-[#333333]">
+          <p className="text-[#333333] hidden lg:block">
             Explore academic, public, and research libraries from one platform.
           </p>
           <button className="btn bg-[#62ab00] text-white">
@@ -30,10 +30,10 @@ const Banner = () => {
 
       <div className="flex items-center">
         <div className="flex-1 space-y-4">
-          <h1 className="text-3xl font-bold text-[#bd0018]">
+          <h1 className="text-xl lg:text-3xl font-bold text-[#bd0018]">
             Books for Every Subject & Field
           </h1>
-          <p className="text-[#333333]">
+          <p className="text-[#333333] hidden lg:block">
             From literature to research journals — find everything you need
           </p>
           <button className="btn bg-[#62ab00] text-white">
@@ -48,11 +48,11 @@ const Banner = () => {
 
       <div className="flex items-center">
         <div className="flex-1 space-y-4">
-          <h1 className="text-[#bd0018] text-3xl font-bold">
+          <h1 className="text-[#bd0018] text-xl lg:text-3xl font-bold">
             {" "}
             Get Any Book Delivered to Your Home
           </h1>
-          <p className="text-[#333333]">
+          <p className="text-[#333333] hidden lg:block">
             Borrow books from partnered libraries and get them delivered
             anywhere.
           </p>
