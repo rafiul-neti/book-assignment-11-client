@@ -1,4 +1,5 @@
 import Banner from "./Banner";
+import BrandMarquee from "./BrandMarquee";
 import Coverage from "./Coverage";
 
 const Home = () => {
@@ -10,6 +11,9 @@ const Home = () => {
 
       {/* coverage section */}
       <Coverage></Coverage>
+
+      {/* animated section */}
+      <BrandMarquee />
     </div>
   );
 };
