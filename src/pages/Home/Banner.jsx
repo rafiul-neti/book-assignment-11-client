@@ -4,7 +4,12 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Banner = () => {
   return (
-    <Carousel autoPlay={true} interval={2000} infiniteLoop={true}>
+    <Carousel
+      autoPlay={true}
+      interval={2000}
+      infiniteLoop={true}
+      showThumbs={false}
+    >
       <div className="flex items-center">
         <div className="flex-1 space-y-4">
           <h1 className="text-3xl font-bold text-[#bd0018]">
