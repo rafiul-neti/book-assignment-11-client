@@ -1,6 +1,7 @@
 import Banner from "./Banner";
 import BrandMarquee from "./BrandMarquee";
 import Coverage from "./Coverage";
+import Testimonial from "./Testimonial";
 
 const Home = () => {
   return (
@@ -14,6 +15,9 @@ const Home = () => {
 
       {/* animated section */}
       <BrandMarquee />
+
+      {/* customer review */}
+      <Testimonial />
     </div>
   );
 };
