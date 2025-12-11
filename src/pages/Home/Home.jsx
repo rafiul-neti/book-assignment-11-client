@@ -1,12 +1,11 @@
-import Plants from '../../components/Home/Plants'
+import Banner from "./Banner";
 
 const Home = () => {
   return (
-    <div>
-      <Plants />
-      {/* More components */}
+    <div className="max-w-7xl mx-auto">
+      <Banner />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
