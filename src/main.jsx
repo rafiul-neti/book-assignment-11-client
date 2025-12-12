@@ -12,7 +12,23 @@ createRoot(document.getElementById("root")).render(
     <ThemeProvider defaultTheme="light">
       <AuthProvider>
         <RouterProvider router={router} />
-        <Toaster position="top-right" reverseOrder={false} />
+
+        <Toaster
+          position="bottom-center"
+          reverseOrder={false}
+          toastOptions={{
+            success: {
+              style: {
+                background: "#62ab00",
+                color: "white",
+              },
+              duration: 2000,
+            },
+            error: {
+              duration: 2000,
+            },
+          }}
+        />
       </AuthProvider>
     </ThemeProvider>
   </StrictMode>

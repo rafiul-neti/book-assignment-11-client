@@ -5,7 +5,7 @@ import SignUp from "../pages/SignUp/SignUp";
 import PlantDetails from "../pages/PlantDetails/PlantDetails";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
-import AddPlant from "../pages/Dashboard/Seller/AddPlant";
+import AddPlant from "../pages/Dashboard/Seller/AddBooks";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import Profile from "../pages/Dashboard/Common/Profile";
 import Statistics from "../pages/Dashboard/Common/Statistics";
