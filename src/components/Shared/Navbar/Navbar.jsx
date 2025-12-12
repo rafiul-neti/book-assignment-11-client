@@ -4,10 +4,19 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 import avatarImg from "../../../assets/images/placeholder.jpg";
+import { useTheme } from "next-themes";
+import toast from "react-hot-toast";
 // import logo from '../../../assets/images/logo-flat.png'
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
+
+  const handleLogout = () => {
+    logOut().then(() => {
+      toast.success("You've Successfully Logged Out!");
+    });
+  };
 
   const links = (
     <>
@@ -18,7 +27,7 @@ const Navbar = () => {
         <NavLink>Books</NavLink>
       </li>
       <li>
-        <NavLink>Dashboard</NavLink>
+        <NavLink to={`/dashboard`}>Dashboard</NavLink>
       </li>
     </>
   );
@@ -94,10 +103,25 @@ const Navbar = () => {
                       Dashboard
                     </Link>
                     <div
-                      onClick={logOut}
+                      onClick={handleLogout}
                       className="px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer"
                     >
                       Logout
+                    </div>
+                    <div className="">
+                      <label className="my-2 flex items-center gap-2 cursor-pointer text-base-content">
+                        <span className="text-sm">
+                          {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+                        </span>
+                        <input
+                          type="checkbox"
+                          className="toggle toggle-primary"
+                          onChange={(e) =>
+                            setTheme(e.target.checked ? "dark" : "light")
+                          }
+                          // checked={theme === "dark"}
+                        />
+                      </label>
                     </div>
                   </>
                 ) : (
