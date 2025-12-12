@@ -14,6 +14,7 @@ import MyInventory from "../pages/Dashboard/Seller/MyInventory";
 import ManageOrders from "../pages/Dashboard/Seller/ManageOrders";
 import MyOrders from "../pages/Dashboard/Customer/MyOrders";
 import { createBrowserRouter } from "react-router";
+import Invoices from "../pages/Dashboard/Customer/Invoices";
 
 export const router = createBrowserRouter([
   {
@@ -49,51 +50,31 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: (
-          <PrivateRoute>
-            <Statistics />
-          </PrivateRoute>
-        ),
+        element: <Statistics />,
       },
       {
         path: "add-plant",
-        element: (
-          <PrivateRoute>
-            <AddPlant />
-          </PrivateRoute>
-        ),
+        element: <AddPlant />,
       },
       {
         path: "my-inventory",
-        element: (
-          <PrivateRoute>
-            <MyInventory />
-          </PrivateRoute>
-        ),
+        element: <MyInventory />,
       },
       {
         path: "manage-users",
-        element: (
-          <PrivateRoute>
-            <ManageUsers />
-          </PrivateRoute>
-        ),
+        element: <ManageUsers />,
       },
       {
         path: "profile",
-        element: (
-          <PrivateRoute>
-            <Profile />
-          </PrivateRoute>
-        ),
+        element: <Profile />,
       },
       {
         path: "my-orders",
-        element: (
-          <PrivateRoute>
-            <MyOrders />
-          </PrivateRoute>
-        ),
+        element: <MyOrders />,
+      },
+      {
+        path: "my-payments",
+        Component: Invoices,
       },
       {
         path: "manage-orders",

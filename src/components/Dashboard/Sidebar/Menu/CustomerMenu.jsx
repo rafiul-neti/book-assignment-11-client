@@ -1,5 +1,6 @@
 import { BsFingerprint } from 'react-icons/bs'
 import { GrUserAdmin } from 'react-icons/gr'
+import { MdPayments } from "react-icons/md";
 import MenuItem from './MenuItem'
 import { useState } from 'react'
 import BecomeSellerModal from '../../../Modal/BecomeSellerModal'
@@ -13,10 +14,11 @@ const CustomerMenu = () => {
   return (
     <>
       <MenuItem icon={BsFingerprint} label='My Orders' address='my-orders' />
+      <MenuItem icon={MdPayments} label={`Invoices`} address={`my-payments`} />
 
       <div
         onClick={() => setIsOpen(true)}
-        className='flex items-center px-4 py-2 mt-5  transition-colors duration-300 transform text-gray-600  hover:bg-gray-300   hover:text-gray-700 cursor-pointer'
+        className='flex items-center px-4 py-2 mt-5  transition-colors duration-300 transform text-gray-600  hover:bg-gray-300 hover:text-gray-700 cursor-pointer'
       >
         <GrUserAdmin className='w-5 h-5' />
 
