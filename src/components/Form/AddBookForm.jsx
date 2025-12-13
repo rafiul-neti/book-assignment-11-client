@@ -3,17 +3,22 @@ import { imageUpload } from "../../utilities/image_upload";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
+import { useState } from "react";
+import { AiOutlineLoading } from "react-icons/ai";
 
 const AddBookForm = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  const [bookUploading, setBookUploading] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const handleAddBook = async (data) => {
+    setBookUploading(true);
     const bookImageUrl = await imageUpload(data.bookImage[0]);
     console.log(data);
     console.log(bookImageUrl);
@@ -40,11 +45,15 @@ const AddBookForm = () => {
           toast.success(
             "Your book has been added in our collection! Thanks for using our services."
           );
+
+          reset();
         }
       })
       .catch((err) => {
         toast.error(err.message);
       });
+
+    setBookUploading(false);
   };
   return (
     <div className="w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50">
@@ -191,7 +200,13 @@ const AddBookForm = () => {
           type="submit"
           className="w-full cursor-pointer p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-[#62ab00] "
         >
-          Save & Continue
+          {bookUploading ? (
+            <span className="flex items-center justify-center">
+              <AiOutlineLoading className="animate-spin" />
+            </span>
+          ) : (
+            "Save & Continue"
+          )}
         </button>
       </form>
     </div>

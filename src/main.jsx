@@ -6,9 +6,12 @@ import { RouterProvider } from "react-router";
 import AuthProvider from "./providers/AuthProvider.jsx";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "next-themes";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme="light">
       <AuthProvider>
         <RouterProvider router={router} />
@@ -31,5 +34,5 @@ createRoot(document.getElementById("root")).render(
         />
       </AuthProvider>
     </ThemeProvider>
-  </StrictMode>
+  </QueryClientProvider>
 );
