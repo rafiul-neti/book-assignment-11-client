@@ -22,10 +22,10 @@ createRoot(document.getElementById("root")).render(
                 background: "#62ab00",
                 color: "white",
               },
-              duration: 2000,
+              duration: 5000,
             },
             error: {
-              duration: 2000,
+              duration: 5000,
             },
           }}
         />

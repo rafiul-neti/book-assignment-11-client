@@ -1,7 +1,12 @@
 import { useForm } from "react-hook-form";
 import { imageUpload } from "../../utilities/image_upload";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
 
 const AddBookForm = () => {
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
   const {
     register,
     handleSubmit,
@@ -14,6 +19,7 @@ const AddBookForm = () => {
     console.log(bookImageUrl);
 
     const bookDetails = {
+      librarianEmail: user.email,
       bookName: data.bookName,
       bookAuthor: data.bookAuthor,
       bookImage: bookImageUrl,
@@ -22,6 +28,23 @@ const AddBookForm = () => {
       bookStatus: data.bookStatus,
       bookDescription: data.bookDescription,
     };
+
+    console.log(bookDetails);
+
+    axiosSecure
+      .post("/books", bookDetails)
+      .then((data) => {
+        console.log(data.data);
+
+        if (data.data.insertedId) {
+          toast.success(
+            "Your book has been added in our collection! Thanks for using our services."
+          );
+        }
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
   return (
     <div className="w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50">
