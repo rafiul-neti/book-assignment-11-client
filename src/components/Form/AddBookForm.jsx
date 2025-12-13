@@ -12,6 +12,16 @@ const AddBookForm = () => {
     const bookImageUrl = await imageUpload(data.bookImage[0]);
     console.log(data);
     console.log(bookImageUrl);
+
+    const bookDetails = {
+      bookName: data.bookName,
+      bookAuthor: data.bookAuthor,
+      bookImage: bookImageUrl,
+      bookPrice: data.bookPrice,
+      bookQuantity: data.bookQuantity,
+      bookStatus: data.bookStatus,
+      bookDescription: data.bookDescription,
+    };
   };
   return (
     <div className="w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50">
@@ -145,7 +155,9 @@ const AddBookForm = () => {
                   </label>
                 </div>
                 {errors.bookImage?.type === "required" && (
-                  <small className="text-[#bd0018]">Book Image is Required.</small>
+                  <small className="text-[#bd0018]">
+                    Book Image is Required.
+                  </small>
                 )}
               </div>
             </div>
