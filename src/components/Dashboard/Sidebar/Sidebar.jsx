@@ -1,28 +1,30 @@
-import { useState } from 'react'
-import { Link } from 'react-router'
-import useAuth from '../../../hooks/useAuth'
+import { useState } from "react";
+import { Link } from "react-router";
+import useAuth from "../../../hooks/useAuth";
 // import logo from '../../../assets/images/logo-flat.png'
 
 // Icons
-import { GrLogout } from 'react-icons/gr'
-import { FcSettings } from 'react-icons/fc'
-import { AiOutlineBars } from 'react-icons/ai'
-import { BsGraphUp } from 'react-icons/bs'
+import { GrLogout } from "react-icons/gr";
+import { FcSettings } from "react-icons/fc";
+import { AiOutlineBars } from "react-icons/ai";
+import { BsGraphUp } from "react-icons/bs";
 
 // User Menu
-import MenuItem from './Menu/MenuItem'
-import AdminMenu from './Menu/AdminMenu'
-import SellerMenu from './Menu/SellerMenu'
-import CustomerMenu from './Menu/CustomerMenu'
+import MenuItem from "./Menu/MenuItem";
+import AdminMenu from "./Menu/AdminMenu";
+import LibrarianMenu from "./Menu/LibrarianMenu";
+import UserMenu from "./Menu/UserMenu";
+// import useRole from "../../../hooks/useRole";
 
 const Sidebar = () => {
-  const { logOut } = useAuth()
-  const [isActive, setActive] = useState(false)
+  const { logOut } = useAuth();
+  const [isActive, setActive] = useState(false);
+  // const { role } = useRole();
 
   // Sidebar Responsive Handler
   const handleToggle = () => {
-    setActive(!isActive)
-  }
+    setActive(!isActive);
+  };
 
   return (
     <>
@@ -72,8 +74,10 @@ const Sidebar = () => {
                 address="/dashboard"
               />
               {/* Role-Based Menu */}
-              <CustomerMenu />
-              <SellerMenu />
+
+              
+              <UserMenu />
+              <LibrarianMenu />
               <AdminMenu />
             </nav>
           </div>
@@ -100,6 +104,6 @@ const Sidebar = () => {
       </div>
     </>
   );
-}
+};
 
-export default Sidebar
+export default Sidebar;

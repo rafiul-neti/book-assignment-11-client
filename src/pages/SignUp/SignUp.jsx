@@ -5,10 +5,12 @@ import { toast } from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { useForm } from "react-hook-form";
 import { imageUpload } from "../../utilities/image_upload";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const SignUp = () => {
   const { createUser, updateUserProfile, signInWithGoogle, loading } =
     useAuth();
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state || "/";
@@ -33,6 +35,13 @@ const SignUp = () => {
       //3. Save username & profile photo
       await updateUserProfile(data.name, image);
       console.log(result);
+
+      const userInfo = {
+        displayName: data.name,
+        photoURL: image,
+        email: data.email,
+      };
+      await axiosSecure.post("/users", userInfo);
 
       navigate(from, { replace: true });
       toast.success("Signup Successful");
