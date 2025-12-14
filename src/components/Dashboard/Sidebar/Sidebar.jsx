@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import useAuth from "../../../hooks/useAuth";
-// import logo from '../../../assets/images/logo-flat.png'
 
 // Icons
 import { GrLogout } from "react-icons/gr";
@@ -14,12 +13,12 @@ import MenuItem from "./Menu/MenuItem";
 import AdminMenu from "./Menu/AdminMenu";
 import LibrarianMenu from "./Menu/LibrarianMenu";
 import UserMenu from "./Menu/UserMenu";
-// import useRole from "../../../hooks/useRole";
+import useRole from "../../../hooks/useRole";
 
 const Sidebar = () => {
   const { logOut } = useAuth();
   const [isActive, setActive] = useState(false);
-  // const { role } = useRole();
+  const { role } = useRole();
 
   // Sidebar Responsive Handler
   const handleToggle = () => {
@@ -32,7 +31,7 @@ const Sidebar = () => {
       <div className="bg-gray-100 text-gray-800 flex justify-between items-center md:hidden py-5">
         <div>
           <div className="block cursor-pointer font-bold">
-            <Link to="/dashboard" className="text-[#62ab00] text-3xl">
+            <Link to="/" className="text-[#62ab00] text-3xl">
               BookCourier
             </Link>
           </div>
@@ -57,7 +56,7 @@ const Sidebar = () => {
           <div>
             {/* Logo */}
             <div className="w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center bg-lime-100 mx-auto">
-              <Link to="/dashboard" className="font-extrabold text-[#62ab00]">
+              <Link to="/" className="font-extrabold text-[#62ab00]">
                 BookCourier
               </Link>
             </div>
@@ -74,11 +73,10 @@ const Sidebar = () => {
                 address="/dashboard"
               />
               {/* Role-Based Menu */}
+              {role === "user" && <UserMenu />}
+              {role === "admin" && <AdminMenu />}
 
-              
-              <UserMenu />
-              <LibrarianMenu />
-              <AdminMenu />
+              {role === "librarian" && <LibrarianMenu />}
             </nav>
           </div>
 

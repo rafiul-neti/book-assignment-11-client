@@ -4,7 +4,7 @@ import { MdPayments } from "react-icons/md";
 import MenuItem from './MenuItem'
 import { useState } from 'react'
 import BecomeSellerModal from '../../../Modal/BecomeSellerModal'
-const CustomerMenu = () => {
+const UserMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   const closeModal = () => {
@@ -30,4 +30,4 @@ const CustomerMenu = () => {
   )
 }
 
-export default CustomerMenu
+export default UserMenu

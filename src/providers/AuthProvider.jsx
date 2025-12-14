@@ -37,11 +37,8 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
-  const updateUserProfile = (name, photo) => {
-    return updateProfile(auth.currentUser, {
-      displayName: name,
-      photoURL: photo,
-    });
+  const updateUserProfile = (updatedInfo) => {
+    return updateProfile(auth.currentUser, updatedInfo);
   };
 
   // onAuthStateChange

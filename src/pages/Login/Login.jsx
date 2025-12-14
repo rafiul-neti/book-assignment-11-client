@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Login = () => {
-  const { signIn, loading, user, } = useAuth();
+  const { signIn, loading, user, setLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -34,10 +34,11 @@ const Login = () => {
     } catch (err) {
       console.log(err);
       toast.error(err?.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  
   return (
     <div className="flex justify-center items-center min-h-screen bg-white">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">

@@ -8,7 +8,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
 const SignUp = () => {
-  const { createUser, updateUserProfile, loading } = useAuth();
+  const { createUser, updateUserProfile, loading, setLoading } = useAuth();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const location = useLocation();
@@ -32,7 +32,11 @@ const SignUp = () => {
       const result = await createUser(data.email, data.password);
 
       //3. Save username & profile photo
-      await updateUserProfile(data.name, image);
+      const updatedInfo = {
+        displayName: data.name,
+        photoURL: image,
+      };
+      await updateUserProfile(updatedInfo);
       console.log(result);
 
       const userInfo = {
@@ -47,6 +51,8 @@ const SignUp = () => {
     } catch (err) {
       console.log(err);
       toast.error(err?.message);
+    } finally {
+      setLoading(false);
     }
   };
 

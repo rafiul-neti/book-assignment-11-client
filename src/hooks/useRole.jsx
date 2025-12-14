@@ -15,8 +15,8 @@ const useRole = () => {
     },
   });
 
-  const { role } = userRole;
-  
+  const { role, } = userRole;
+
   return { role, roleLoading };
 };
 
