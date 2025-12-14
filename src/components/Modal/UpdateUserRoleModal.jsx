@@ -84,9 +84,9 @@ const UpdateUserRoleModal = ({
                     name="role"
                     id=""
                   >
-                    <option value="user">User</option>
-                    <option value="librarian">Librarian</option>
-                    <option value="admin">Admin</option>
+                    <option value="user">Make User</option>
+                    <option value="librarian">Make Librarian</option>
+                    <option value="admin">Make Admin</option>
                   </select>
                 </div>
                 <div className="flex mt-2 justify-around">
