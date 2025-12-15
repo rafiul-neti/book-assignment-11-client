@@ -20,18 +20,24 @@ const AddBookForm = () => {
   const handleAddBook = async (data) => {
     setBookUploading(true);
     const bookImageUrl = await imageUpload(data.bookImage[0]);
-    console.log(data);
-    console.log(bookImageUrl);
+    const {
+      bookName,
+      bookAuthor,
+      bookPrice,
+      bookQuantity,
+      bookStatus,
+      bookDescription,
+    } = data;
 
     const bookDetails = {
       librarianEmail: user.email,
-      bookName: data.bookName,
-      bookAuthor: data.bookAuthor,
       bookImage: bookImageUrl,
-      bookPrice: data.bookPrice,
-      bookQuantity: data.bookQuantity,
-      bookStatus: data.bookStatus,
-      bookDescription: data.bookDescription,
+      bookName,
+      bookAuthor,
+      bookPrice,
+      bookQuantity,
+      bookStatus,
+      bookDescription,
     };
 
     console.log(bookDetails);
@@ -39,7 +45,7 @@ const AddBookForm = () => {
     axiosSecure
       .post("/books", bookDetails)
       .then((data) => {
-        console.log(data.data);
+        // console.log(data.data);
 
         if (data.data.insertedId) {
           toast.success(

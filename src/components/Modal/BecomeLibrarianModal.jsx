@@ -3,6 +3,8 @@ import { useForm, useWatch } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 const BecomeLibrarianModal = ({ closeModal, isOpen }) => {
   const [warehousesData, setWarehousesData] = useState([]);
@@ -13,6 +15,8 @@ const BecomeLibrarianModal = ({ closeModal, isOpen }) => {
     control,
     formState: { errors },
   } = useForm();
+
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
     axios.get("/warehouses.json").then((data) => setWarehousesData(data.data));
@@ -32,8 +36,22 @@ const BecomeLibrarianModal = ({ closeModal, isOpen }) => {
     return districts;
   };
 
-  const handleLibrarianApplication = (data) => {
+  const handleLibrarianApplication = async (data) => {
     console.log(data);
+
+    try {
+      const res = await axiosSecure.post("/librarians", data);
+      if (res.data.insertedId) {
+        toast.success(
+          "Your application is received. We will contact you as soon as possible."
+        );
+
+        closeModal();
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
   };
 
   return (
@@ -92,7 +110,7 @@ const BecomeLibrarianModal = ({ closeModal, isOpen }) => {
                 <input
                   type="text"
                   {...register("libraryName", { required: true })}
-                  placeholder="Enter Your Name Here"
+                  placeholder="Your Library Name"
                   className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-[#62ab00] bg-white text-gray-900"
                   data-temp-mail-org="0"
                 />
@@ -178,7 +196,7 @@ const BecomeLibrarianModal = ({ closeModal, isOpen }) => {
               <button
                 onClick={handleSubmit(handleLibrarianApplication)}
                 type="button"
-                className="cursor-pointer inline-flex justify-center rounded-md border border-transparent bg-[#62ab00] px-4 py-2 text-sm font-medium text-white hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+                className="cursor-pointer inline-flex justify-center rounded-md border border-transparent bg-[#62ab00] px-4 py-2 text-sm font-medium text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
               >
                 Apply
               </button>
