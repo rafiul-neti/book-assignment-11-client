@@ -89,9 +89,12 @@ const AddBookForm = () => {
               </label>
               <select
                 {...register("bookStatus", { required: true })}
-                className="w-full px-4 py-3 border border-lime-300 focus:outline-[#62ab00] rounded-md bg-white"
-                name="category"
+                defaultValue="Select Status"
+                className="select w-full px-4 py-3 border border-lime-300 focus:outline-[#62ab00] rounded-md bg-white"
               >
+                <option disabled={true} selected={true}>
+                  Select Status
+                </option>
                 <option value="Published">Published</option>
                 <option value="Unpublished">Unpublished</option>
               </select>
@@ -204,6 +207,7 @@ const AddBookForm = () => {
         {/* Submit Button */}
         <button
           type="submit"
+          disabled={bookUploading}
           className="w-full cursor-pointer p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-[#62ab00] "
         >
           {bookUploading ? (

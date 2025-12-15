@@ -16,6 +16,7 @@ import MyOrders from "../pages/Dashboard/Customer/MyOrders";
 import { createBrowserRouter } from "react-router";
 import Invoices from "../pages/Dashboard/Customer/Invoices";
 import ManageBooks from "../pages/Dashboard/Admin/ManageBooks";
+import AllBooks from "../pages/AllBooks/AllBooks";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp />,
+      },
+      {
+        path: "/all-books",
+        Component: AllBooks,
       },
     ],
   },
