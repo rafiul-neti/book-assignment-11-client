@@ -12,7 +12,7 @@ const BookDetails = () => {
   const axiosSecure = useAxiosSecure();
   // console.log([id, typeof id]);
 
-  const { data: book = {} } = useQuery({
+  const { data: book = {}, isLoading } = useQuery({
     queryKey: ["book-details", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/books/${id}/details`);
@@ -21,6 +21,8 @@ const BookDetails = () => {
   });
 
   let [isOpen, setIsOpen] = useState(false);
+
+  if (isLoading) return <LoadingSpinner />;
 
   const closeModal = () => {
     setIsOpen(false);
