@@ -173,7 +173,7 @@ const AllBooks = () => {
         </>
 
         {/* pagination pages */}
-        <div className="my-3 w-11/12 mx-auto flex flex-wrap items-center gap-2 justify-center">
+        <div className="mb-5 mt-10 w-11/12 mx-auto flex flex-wrap items-center gap-2 justify-center">
           {currentPage > 0 && (
             <button
               onClick={() => setCurrentPage(currentPage - 1)}
