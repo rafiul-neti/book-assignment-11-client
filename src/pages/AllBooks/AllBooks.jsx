@@ -25,11 +25,11 @@ const AllBooks = () => {
       </p>
 
       <Container>
-        <div className="my-5 pt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
+        <div className="my-5 pt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {books.map((book) => (
             <Link
               key={book._id}
-              to={`/plant/1`}
+              to={`/book/${book._id}`}
               className="col-span-1 cursor-pointer group shadow-xl p-3 rounded-xl"
             >
               <div className="flex flex-col gap-2 w-full">
@@ -55,11 +55,19 @@ const AllBooks = () => {
             "
                   ></div>
                 </div>
-                <div className="font-semibold text-lg">{book.bookName}</div>
-                <div className="font-semibold text-lg">Category: Indoor</div>
-                <div className="font-semibold text-lg">Quantity: 10</div>
-                <div className="flex flex-row items-center gap-1">
-                  <div className="font-semibold"> Price: 15$</div>
+                <div className="font-semibold text-xl">
+                  <h4 className="text-center">{book.bookName}</h4>
+                </div>
+                <div className="">
+                  <p className="text-center">{book.bookAuthor}</p>
+                  <p
+                    className={`${
+                      book.bookQuantity > 0 && "text-[#33c24d]"
+                    } font-medium text-center`}
+                  >
+                    Product In Stock
+                  </p>
+                  <p className="font-bold text-center">TK. {book.bookPrice}</p>
                 </div>
               </div>
             </Link>

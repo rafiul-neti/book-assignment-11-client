@@ -2,3 +2,15 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @plugin "daisyui";
+
+.icon {
+  font-size: 2rem;
+  color: orange;
+}
+
+.icon-style {
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+  justify-content: flex-start;
+}

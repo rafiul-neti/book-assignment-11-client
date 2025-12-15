@@ -2,7 +2,7 @@ import Home from "../pages/Home/Home";
 import ErrorPage from "../pages/ErrorPage";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
-import PlantDetails from "../pages/PlantDetails/PlantDetails";
+import BookDetails from "../pages/BookDetails/BookDetails";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
 import AddPlant from "../pages/Dashboard/Seller/AddBooks";
@@ -29,8 +29,8 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/plant/:id",
-        element: <PlantDetails />,
+        path: "/book/:id",
+        element: <BookDetails />,
       },
       {
         path: "/login",
