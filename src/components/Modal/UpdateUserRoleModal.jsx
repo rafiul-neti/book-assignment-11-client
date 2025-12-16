@@ -80,7 +80,7 @@ const UpdateUserRoleModal = ({
                   <select
                     value={updatedRole}
                     onChange={(e) => setUpdatedRole(e.target.value)}
-                    className="w-full my-3 border border-gray-200 rounded-xl px-2 py-3"
+                    className="select w-full my-3 border border-green-500 rounded-xl px-2 py-3"
                     name="role"
                     id=""
                   >
@@ -93,13 +93,13 @@ const UpdateUserRoleModal = ({
                   <button
                     onClick={() => handleUpdateUserRole(userInfo)}
                     type="button"
-                    className="cursor-pointer inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+                    className="btn btn-sm cursor-pointer inline-flex justify-center rounded-md border border-green-600 bg-green-100 px-4 py-2 text-base font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
                   >
                     Update
                   </button>
                   <button
                     type="button"
-                    className="cursor-pointer inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                    className="btn btn-sm cursor-pointer inline-flex justify-center rounded-md border border-red-600 bg-red-100 px-4 py-2 text-text-base font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
                     onClick={closeModal}
                   >
                     Cancel

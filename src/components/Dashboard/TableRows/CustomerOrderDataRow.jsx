@@ -71,8 +71,14 @@ const CustomerOrderDataRow = ({ order, refetch }) => {
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <p
           className={`${
-            orderStatus === "cancelled" ? "text-red-600" : "text-gray-900"
-          } capitalize`}
+            orderStatus === "cancelled"
+              ? "text-red-600"
+              : orderStatus === "shipped"
+              ? "text-[#7ED321]"
+              : orderStatus === "delivered"
+              ? "text-green-700"
+              : "text-gray-900"
+          } capitalize font-bold`}
         >
           {orderStatus}
         </p>
@@ -83,7 +89,7 @@ const CustomerOrderDataRow = ({ order, refetch }) => {
           "--"
         ) : (
           <>
-            {paymentStatus === "unpaid" && (
+            {orderStatus === "pending" && (
               <button
                 onClick={() => handleCancelOrder(order._id)}
                 className="btn btn-sm relative disabled:cursor-not-allowed cursor-pointer inline-block px-3 py-1 font-semibold text-lime-900 leading-tight"
@@ -93,7 +99,10 @@ const CustomerOrderDataRow = ({ order, refetch }) => {
               </button>
             )}
 
-            <button className="mx-1.5 btn btn-sm text-white bg-[#62ab00]">
+            <button
+              disabled={paymentStatus === "paid" ? true : false}
+              className="mx-1.5 btn btn-sm text-white bg-[#62ab00] disabled:bg-gray-500 disabled:text-black disabled:cursor-none"
+            >
               Pay
             </button>
           </>

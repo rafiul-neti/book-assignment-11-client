@@ -28,6 +28,13 @@ const UserDataRow = () => {
     setSelectedUser(null);
   };
 
+  const roleStyles = {
+    admin: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
+    librarian:
+      "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+    user: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
+  };
+
   return (
     <>
       <div className="mb-4">
@@ -62,26 +69,26 @@ const UserDataRow = () => {
           <tr>
             <th
               scope="col"
-              className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+              className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 text-center text-base uppercase font-bold"
             >
               User Info
             </th>
             <th
               scope="col"
-              className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+              className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 text-center text-base uppercase font-bold"
             >
               Email
             </th>
             <th
               scope="col"
-              className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+              className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 text-center text-base uppercase font-bold"
             >
               Current Role
             </th>
 
             <th
               scope="col"
-              className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+              className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800 text-center text-base uppercase font-bold"
             >
               Admin Action
             </th>
@@ -107,19 +114,21 @@ const UserDataRow = () => {
                 <p className="text-gray-900 ">{user?.email}</p>
               </td>
               <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                <p className="capitalize">{user.userRole}</p>
+                <p
+                  className={`capitalize rounded-full px-3 py-1 text-sm font-medium ${
+                    roleStyles[user.userRole]
+                  }`}
+                >
+                  {user.userRole}
+                </p>
               </td>
 
               <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                 <span
                   onClick={() => openModal(user)}
-                  className="relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
+                  className="btn btn-sm cursor-pointer text-base bg-green-100 px-3 py-1 font-semibold text-green-900 leading-tight"
                 >
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
-                  ></span>
-                  <span className="relative">Update Role</span>
+                  Update Role
                 </span>
                 {/* Modal */}
                 <UpdateUserRoleModal

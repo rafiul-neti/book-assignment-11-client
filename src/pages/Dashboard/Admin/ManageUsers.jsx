@@ -27,7 +27,11 @@ const ManageUsers = () => {
           </div>
         </TabPanel>
 
-        <TabPanel>Have to Update from database</TabPanel>
+        <TabPanel>
+          <div className="min-h-screen flex justify-center items-center">
+            <p className='text-3xl font-bold text-gray-400'>No one has applied to be "Librarian" yet.</p>
+          </div>
+        </TabPanel>
       </Tabs>
     </section>
   );
