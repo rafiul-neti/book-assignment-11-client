@@ -5,16 +5,16 @@ import SignUp from "../pages/SignUp/SignUp";
 import BookDetails from "../pages/BookDetails/BookDetails";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
-import AddPlant from "../pages/Dashboard/Seller/AddBooks";
+import AddBooks from "../pages/Dashboard/Librarian/AddBooks";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import Profile from "../pages/Dashboard/Common/Profile";
 import Statistics from "../pages/Dashboard/Common/Statistics";
 import MainLayout from "../layouts/MainLayout";
-import MyInventory from "../pages/Dashboard/Seller/MyInventory";
-import ManageOrders from "../pages/Dashboard/Seller/ManageOrders";
-import MyOrders from "../pages/Dashboard/Customer/MyOrders";
+import MyBooks from "../pages/Dashboard/Librarian/MyBooks";
+import ManageOrders from "../pages/Dashboard/Librarian/ManageOrders";
+import MyOrders from "../pages/Dashboard/User/MyOrders";
 import { createBrowserRouter } from "react-router";
-import Invoices from "../pages/Dashboard/Customer/Invoices";
+import Invoices from "../pages/Dashboard/User/Invoices";
 import ManageBooks from "../pages/Dashboard/Admin/ManageBooks";
 import AllBooks from "../pages/AllBooks/AllBooks";
 
@@ -60,11 +60,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "add-plant",
-        element: <AddPlant />,
+        element: <AddBooks />,
       },
       {
-        path: "my-inventory",
-        element: <MyInventory />,
+        path: "my-books",
+        element: <MyBooks />,
       },
       {
         path: "manage-users",
