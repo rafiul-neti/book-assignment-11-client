@@ -1,5 +1,4 @@
 import Container from "../../components/Shared/Container";
-import Heading from "../../components/Shared/Heading";
 import Button from "../../components/Shared/Button/Button";
 import PurchaseModal from "../../components/Modal/PurchaseModal";
 import { useState } from "react";
@@ -11,9 +10,8 @@ import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 const BookDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
-  // console.log([id, typeof id]);
 
-  const { data: book = {}, isLoading } = useQuery({
+  const { data: bookAndSeller = {}, isLoading } = useQuery({
     queryKey: ["book-details", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/books/${id}/details`);
@@ -25,13 +23,16 @@ const BookDetails = () => {
 
   if (isLoading) return <LoadingSpinner />;
 
+  const { result: book, whoIsLibrarian } = bookAndSeller || {};
+  console.log(book, whoIsLibrarian);
+
   const closeModal = () => {
     setIsOpen(false);
   };
 
   return (
     <Container>
-      <div className="mx-auto flex flex-col lg:flex-row justify-between w-full gap-12">
+      <div className="mx-auto bg-gray-50 p-3 dark:bg-slate-950 flex flex-col lg:flex-row justify-between lg:items-center w-full gap-12">
         {/* Header */}
         <div className="flex flex-col gap-6 flex-1">
           <div>
@@ -44,20 +45,22 @@ const BookDetails = () => {
             </div>
           </div>
         </div>
-        <div className="md:gap-10 flex-1">
+        <div className="md:gap-10 flex-1 p-2">
           {/* Plant Info */}
-          <Heading
-            title={"Money Plant"}
-            subtitle={`Category: ${"Succulent"}`}
-          />
+          <div className="">
+            <div className="text-2xl font-bold text-gray-900 dark:text-slate-100">
+              {book.bookName}
+            </div>
+            <div className="mt-2 text-gray-500 dark:text-slate-400">
+              Author: {book.bookAuthor}
+            </div>
+          </div>
           <hr className="my-6" />
           <div
             className="
-          text-lg font-light text-neutral-500"
+          text-lg font-normal text-gray-700 dark:text-slate-300"
           >
-            Professionally deliver sticky testing procedures for next-generation
-            portals. Objectively communicate just in time infrastructures
-            before.
+            {book.bookDescription}
           </div>
           <hr className="my-6" />
 
@@ -71,32 +74,38 @@ const BookDetails = () => {
                 gap-2
               "
           >
-            <div>Seller: Shakil Ahmed Atik</div>
+            <div>Seller: {whoIsLibrarian.displayName}</div>
 
             <img
               className="rounded-full"
-              height="30"
+              height="auto"
               width="30"
               alt="Avatar"
               referrerPolicy="no-referrer"
-              src="https://lh3.googleusercontent.com/a/ACg8ocKUMU3XIX-JSUB80Gj_bYIWfYudpibgdwZE1xqmAGxHASgdvCZZ=s96-c"
+              src={whoIsLibrarian.photoURL}
             />
           </div>
           <hr className="my-6" />
           <div>
             <p
-              className="
-                gap-4 
-                font-light
-                text-neutral-500
-              "
+              className={`gap-4 font-bold ${
+                book.bookQuantity > 0
+                  ? "text-[#62ab00] dark:text-[#7ED321]"
+                  : "text-red-600"
+              }`}
             >
-              Quantity: 10 Units Left Only!
+              {book.bookQuantity > 0
+                ? `Quantity: ${book.bookQuantity} Units Left Only!`
+                : "Stock Out"}
             </p>
           </div>
           <hr className="my-6" />
           <div className="flex justify-between">
-            <p className="font-bold text-3xl text-gray-500">Price: 10$</p>
+            <p className="font-bold text-3xl">
+              <span className="text-gray-900 dark:text-[#7ED321]">
+                TK.{book.bookPrice}
+              </span>
+            </p>
             <div>
               <Button onClick={() => setIsOpen(true)} label="Purchase" />
             </div>

@@ -23,8 +23,8 @@ const AllBooks = () => {
     ],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/all-books?status=published&limit=10&skip=${
-          currentPage * 10
+        `/all-books?status=published&limit=12&skip=${
+          currentPage * 12
         }&sortBy=price&sortOrder=${sortOrder}&searchByTitle=${debouncedSearch}`
       );
 
@@ -42,7 +42,7 @@ const AllBooks = () => {
 
   const books = data?.result || [];
   const booksCount = data?.totalBooks || 0;
-  const totalPages = Math.ceil(booksCount / 10);
+  const totalPages = Math.ceil(booksCount / 12);
 
   // console.log({ booksCount, total: data?.totalBooks, totalPages });
 
