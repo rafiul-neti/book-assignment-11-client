@@ -1,6 +1,7 @@
 import React from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Link } from "react-router";
 
 const Banner = () => {
   return (
@@ -18,9 +19,9 @@ const Banner = () => {
           <p className="text-[#333333] hidden lg:block">
             Explore academic, public, and research libraries from one platform.
           </p>
-          <button className="btn bg-[#62ab00] text-white">
+          <Link to={`/all-books`} className="btn bg-[#62ab00] text-white">
             Browse All Books
-          </button>
+          </Link>
         </div>
 
         <div className="flex-1">
@@ -36,9 +37,9 @@ const Banner = () => {
           <p className="text-[#333333] hidden lg:block">
             From literature to research journals — find everything you need
           </p>
-          <button className="btn bg-[#62ab00] text-white">
+          <Link to={`/all-books`} className="btn bg-[#62ab00] text-white">
             View Collection
-          </button>
+          </Link>
         </div>
 
         <div className="flex-1">
@@ -56,9 +57,9 @@ const Banner = () => {
             Borrow books from partnered libraries and get them delivered
             anywhere.
           </p>
-          <button className="btn bg-[#62ab00] text-white">
+          <Link to={`/all-books`} className="btn bg-[#62ab00] text-white">
             Browse All Books
-          </button>
+          </Link>
         </div>
 
         <div className="flex-1">

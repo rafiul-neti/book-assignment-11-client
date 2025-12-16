@@ -2,6 +2,7 @@ import Banner from "./Banner";
 import BrandMarquee from "./BrandMarquee";
 import Coverage from "./Coverage";
 import FAQ from "./FAQ";
+import LatestBooks from "./LatestBooks";
 import Testimonial from "./Testimonial";
 
 const Home = () => {
@@ -10,6 +11,7 @@ const Home = () => {
       <Banner />
 
       {/* latest books */}
+      <LatestBooks />
 
       {/* coverage section */}
       <Coverage></Coverage>
