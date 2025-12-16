@@ -99,7 +99,7 @@ const UpdateUserRoleModal = ({
                   </button>
                   <button
                     type="button"
-                    className="btn btn-sm cursor-pointer inline-flex justify-center rounded-md border border-red-600 bg-red-100 px-4 py-2 text-text-base font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                    className="btn btn-sm cursor-pointer inline-flex justify-center rounded-md border border-red-600 bg-red-100 px-4 py-2 text-base font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
                     onClick={closeModal}
                   >
                     Cancel
