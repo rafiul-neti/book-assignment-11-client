@@ -4,10 +4,12 @@ import { MdOutlineCancelPresentation } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useNavigate } from "react-router";
 
 const PurchaseModal = ({ closeModal, isOpen, book }) => {
   const { user } = useAuth();
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
   // Total Price Calculation
 
   const {
@@ -17,11 +19,21 @@ const PurchaseModal = ({ closeModal, isOpen, book }) => {
   } = useForm();
 
   const handleBookOrder = async (data) => {
-    console.log(data);
-    console.log(book._id);
+    // console.log(data);
+    // console.log(book._id);
+    const orderInfo = { bookId: book._id, orderedAt: new Date(), ...data };
+    // console.log(orderInfo);
 
     try {
-      const res = await axiosSecure.post(`/orders`)
+      const res = await axiosSecure.post(`/orders`, orderInfo);
+      if (res.data.insertedId) {
+        toast.success(
+          `Your order has been placed for "${book.bookName}". Please pay to complete further procedures.`
+        );
+
+        closeModal();
+        navigate("/dashboard/my-orders");
+      }
     } catch (error) {
       toast.error(error.message);
     }
