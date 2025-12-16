@@ -6,6 +6,7 @@ import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
+import { IoMdHeartEmpty } from "react-icons/io";
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -86,7 +87,12 @@ const BookDetails = () => {
             />
           </div>
           <hr className="my-6" />
-          <div>
+          <div className="flex justify-between items-center">
+            <p className="font-bold text-3xl">
+              <span className="text-gray-900 dark:text-[#7ED321]">
+                TK.{book.bookPrice}
+              </span>
+            </p>
             <p
               className={`gap-4 font-bold ${
                 book.bookQuantity > 0
@@ -95,24 +101,22 @@ const BookDetails = () => {
               }`}
             >
               {book.bookQuantity > 0
-                ? `Quantity: ${book.bookQuantity} Units Left Only!`
+                ? `Quantity: ${book.bookQuantity} Pcs. Left Only!`
                 : "Stock Out"}
             </p>
           </div>
           <hr className="my-6" />
-          <div className="flex justify-between">
-            <p className="font-bold text-3xl">
-              <span className="text-gray-900 dark:text-[#7ED321]">
-                TK.{book.bookPrice}
-              </span>
-            </p>
+          <div className="flex justify-between items-center">
+            <button className="btn btn-outline text-base">
+              <IoMdHeartEmpty size={20} /> Add to WishList
+            </button>
             <div>
-              <Button onClick={() => setIsOpen(true)} label="Purchase" />
+              <Button onClick={() => setIsOpen(true)} label="Order Now" />
             </div>
           </div>
           <hr className="my-6" />
 
-          <PurchaseModal closeModal={closeModal} isOpen={isOpen} />
+          <PurchaseModal closeModal={closeModal} isOpen={isOpen} book={book} />
         </div>
       </div>
     </Container>
