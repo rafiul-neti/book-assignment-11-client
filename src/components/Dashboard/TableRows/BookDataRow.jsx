@@ -54,7 +54,7 @@ const BookDataRow = ({ book, refetch }) => {
         </div>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <p className="text-gray-900 text-center">{book.bookName}</p>
+        <p className="text-gray-900 text-left">{book.bookName}</p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <p className="text-gray-900 text-center">{book.bookAuthor}</p>
