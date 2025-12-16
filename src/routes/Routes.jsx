@@ -17,6 +17,9 @@ import { createBrowserRouter } from "react-router";
 import Invoices from "../pages/Dashboard/User/Invoices";
 import ManageBooks from "../pages/Dashboard/Admin/ManageBooks";
 import AllBooks from "../pages/AllBooks/AllBooks";
+import LibrarianOnlyRoute from "./LibrarianOnlyRoute";
+import AdminOnlyRoute from "./AdminOnlyRoute";
+import UserOnlyRoutes from "./UserOnlyRoutes";
 
 export const router = createBrowserRouter([
   {
@@ -59,20 +62,36 @@ export const router = createBrowserRouter([
         element: <Statistics />,
       },
       {
-        path: "add-plant",
-        element: <AddBooks />,
+        path: "add-book",
+        element: (
+          <LibrarianOnlyRoute>
+            <AddBooks />
+          </LibrarianOnlyRoute>
+        ),
       },
       {
         path: "my-books",
-        element: <MyBooks />,
+        element: (
+          <LibrarianOnlyRoute>
+            <MyBooks />
+          </LibrarianOnlyRoute>
+        ),
       },
       {
         path: "manage-users",
-        element: <ManageUsers />,
+        element: (
+          <AdminOnlyRoute>
+            <ManageUsers />
+          </AdminOnlyRoute>
+        ),
       },
       {
         path: "manage-books",
-        element: <ManageBooks />,
+        element: (
+          <AdminOnlyRoute>
+            <ManageBooks />
+          </AdminOnlyRoute>
+        ),
       },
       {
         path: "profile",
@@ -80,15 +99,27 @@ export const router = createBrowserRouter([
       },
       {
         path: "my-orders",
-        element: <MyOrders />,
+        element: (
+          <UserOnlyRoutes>
+            <MyOrders />
+          </UserOnlyRoutes>
+        ),
       },
       {
         path: "my-payments",
-        Component: Invoices,
+        element: (
+          <UserOnlyRoutes>
+            <Invoices />
+          </UserOnlyRoutes>
+        ),
       },
       {
         path: "manage-orders",
-        element: <ManageOrders />,
+        element: (
+          <LibrarianOnlyRoute>
+            <ManageOrders />
+          </LibrarianOnlyRoute>
+        ),
       },
     ],
   },

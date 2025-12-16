@@ -22,7 +22,6 @@ const MyOrders = () => {
         </h1>
       </div>
 
-
       {orders.length === 0 ? (
         <div className="min-h-screen flex items-center justify-center">
           <span className="text-xl md:text-2xl lg:text-6xl font-bold text-gray-600">
@@ -78,7 +77,11 @@ const MyOrders = () => {
                   </thead>
                   <tbody>
                     {orders.map((order) => (
-                      <CustomerOrderDataRow key={order._id} order={order} refetch={refetch} />
+                      <CustomerOrderDataRow
+                        key={order._id}
+                        order={order}
+                        refetch={refetch}
+                      />
                     ))}
                   </tbody>
                 </table>
