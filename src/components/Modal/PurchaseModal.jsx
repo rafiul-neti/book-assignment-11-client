@@ -21,7 +21,14 @@ const PurchaseModal = ({ closeModal, isOpen, book }) => {
   const handleBookOrder = async (data) => {
     // console.log(data);
     // console.log(book._id);
-    const orderInfo = { bookId: book._id, orderedAt: new Date(), ...data };
+    const orderInfo = {
+      librarianEmail: book.librarianEmail,
+      bookName: book.bookName,
+      bookImage: book.bookImage,
+      bookPrice: book.bookPrice,
+      orderedAt: new Date(),
+      ...data,
+    };
     // console.log(orderInfo);
 
     try {

@@ -6,7 +6,7 @@ import { imageUpload } from "../../utilities/image_upload";
 
 const UpdateUserProfileModal = ({ closeModal, isOpen }) => {
   const { user, updateUserProfile } = useAuth();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const handleUpdateProfile = async (data) => {
     console.log(data);
@@ -23,9 +23,12 @@ const UpdateUserProfileModal = ({ closeModal, isOpen }) => {
       }
 
       if (Object.keys(updatedInfo).length > 0) {
-        await updateUserProfile(updatedInfo);
+        updateUserProfile(updatedInfo).then(() => {
+          toast.success("Your profile has been updated!");
 
-        toast.success("Your profile has been updated!");
+          reset();
+          closeModal();
+        }).catch(err=> toast.error(err.message));
       }
     } catch (err) {
       toast.error(err.message || "Something went wrong!");

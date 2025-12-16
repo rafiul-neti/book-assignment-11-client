@@ -4,7 +4,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
 
-const PlantDataRow = ({ book, refetch }) => {
+const BookDataRow = ({ book, refetch }) => {
   const axiosSecure = useAxiosSecure();
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -105,4 +105,4 @@ const PlantDataRow = ({ book, refetch }) => {
   );
 };
 
-export default PlantDataRow;
+export default BookDataRow;

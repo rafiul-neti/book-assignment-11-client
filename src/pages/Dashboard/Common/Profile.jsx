@@ -3,6 +3,7 @@ import UpdateUserProfileModal from "../../../components/Modal/UpdateUserProfileM
 import LoadingSpinner from "../../../components/Shared/LoadingSpinner";
 import useAuth from "../../../hooks/useAuth";
 import useRole from "../../../hooks/useRole";
+import toast from "react-hot-toast";
 
 const Profile = () => {
   const { user } = useAuth();
@@ -16,6 +17,10 @@ const Profile = () => {
   const closeModal = () => {
     setIsOpen(false);
   };
+
+  const handleChangePassword = () =>{
+    toast.success(`We haven't added any funtionalities here! Thank you for your concern.`)
+  }
 
   return (
     <>
@@ -58,7 +63,7 @@ const Profile = () => {
                   >
                     Update Profile
                   </button>
-                  <button className="bg-[#62ab00] px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-lime-800">
+                  <button onClick={handleChangePassword} className="bg-[#62ab00] px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-lime-800">
                     Change Password
                   </button>
                 </div>

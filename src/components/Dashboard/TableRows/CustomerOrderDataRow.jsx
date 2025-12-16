@@ -1,8 +1,45 @@
-import { useState } from 'react'
-import DeleteModal from '../../Modal/DeleteModal'
-const CustomerOrderDataRow = () => {
-  let [isOpen, setIsOpen] = useState(false)
-  const closeModal = () => setIsOpen(false)
+import toast from "react-hot-toast";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+
+const CustomerOrderDataRow = ({ order, refetch }) => {
+  const axiosSecure = useAxiosSecure();
+
+  const {
+    bookImage,
+    bookName,
+    bookPrice,
+    orderStatus,
+    paymentStatus,
+    orderedAt,
+  } = order;
+
+  const handleCancelOrder = (id) => {
+    const cancelOrder = { status: "cancelled" };
+
+    Swal.fire({
+      title: "Do you want to cancel the order?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, cancel it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axiosSecure.patch(`/orders/${id}`, cancelOrder);
+
+          if (res.data.modifiedCount) {
+            toast.success(`Your order has been cancelled!`);
+            refetch();
+          }
+        } catch (error) {
+          toast.error(error.message);
+        }
+      }
+    });
+  };
 
   return (
     <tr>
@@ -12,7 +49,7 @@ const CustomerOrderDataRow = () => {
             <div className="block relative">
               <img
                 alt="profile"
-                src="https://i.ibb.co.com/rMHmQP2/money-plant-in-feng-shui-brings-luck.jpg"
+                src={bookImage}
                 className="mx-auto object-cover rounded h-10 w-15 "
               />
             </div>
@@ -21,33 +58,49 @@ const CustomerOrderDataRow = () => {
       </td>
 
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <p className="text-gray-900">Money Plant</p>
+        <p className="text-gray-900">{bookName}</p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <p className="text-gray-900">$120</p>
+        <p className="text-gray-900">TK.{bookPrice}</p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <p className="text-gray-900">5</p>
+        <p className="text-gray-900">
+          {new Date(orderedAt).toLocaleDateString()}
+        </p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <p className="text-gray-900">Pending</p>
-      </td>
-
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <button
-          onClick={() => setIsOpen(true)}
-          className="btn btn-sm relative disabled:cursor-not-allowed cursor-pointer inline-block px-3 py-1 font-semibold text-lime-900 leading-tight"
+        <p
+          className={`${
+            orderStatus === "cancelled" ? "text-red-600" : "text-gray-900"
+          } capitalize`}
         >
-          <span className="absolute cursor-pointer inset-0 bg-red-200 opacity-50"></span>
-          <span className="relative cursor-pointer">Cancel</span>
-        </button>
+          {orderStatus}
+        </p>
+      </td>
 
-        <button className="mx-1.5 btn btn-sm text-white bg-[#62ab00]">Pay</button>
+      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        {orderStatus === "cancelled" ? (
+          "--"
+        ) : (
+          <>
+            {paymentStatus === "unpaid" && (
+              <button
+                onClick={() => handleCancelOrder(order._id)}
+                className="btn btn-sm relative disabled:cursor-not-allowed cursor-pointer inline-block px-3 py-1 font-semibold text-lime-900 leading-tight"
+              >
+                <span className="absolute cursor-pointer inset-0 bg-red-200 opacity-50"></span>
+                <span className="relative cursor-pointer">Cancel</span>
+              </button>
+            )}
 
-        <DeleteModal isOpen={isOpen} closeModal={closeModal} />
+            <button className="mx-1.5 btn btn-sm text-white bg-[#62ab00]">
+              Pay
+            </button>
+          </>
+        )}
       </td>
     </tr>
   );
-}
+};
 
-export default CustomerOrderDataRow
+export default CustomerOrderDataRow;
