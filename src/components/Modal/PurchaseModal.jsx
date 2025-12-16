@@ -22,6 +22,7 @@ const PurchaseModal = ({ closeModal, isOpen, book }) => {
     // console.log(data);
     // console.log(book._id);
     const orderInfo = {
+      bookId: book._id,
       librarianEmail: book.librarianEmail,
       bookName: book.bookName,
       bookImage: book.bookImage,

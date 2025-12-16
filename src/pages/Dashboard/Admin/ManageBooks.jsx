@@ -22,7 +22,7 @@ const ManageBooks = () => {
   const { result: allbooks = [], totalBooks } = data || {};
 
   const handleBookStatus = (id, status) => {
-    console.log({ id, status });
+    // console.log({ id, status });
     const changedStatus = { status };
 
     Swal.fire({
@@ -41,6 +41,32 @@ const ManageBooks = () => {
           if (res.data.modifiedCount) {
             refetch();
             toast.success(`Your book's status has been updated to ${status}!`);
+          }
+        } catch (error) {
+          toast.error(error.message);
+        }
+      }
+    });
+  };
+
+  const handleDeleteBook = (id) => {
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to delete this book?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, I wanna Delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axiosSecure.delete(`/books/${id}`);
+          // console.log(res.data)
+          if (res.data.bookDeletation.deletedCount) {
+            toast.success("You've successfully deleted a book.");
+            refetch();
           }
         } catch (error) {
           toast.error(error.message);
@@ -128,7 +154,10 @@ const ManageBooks = () => {
                         </button>
                       )}
 
-                      <button className="mx-2 btn btn-sm cursor-pointer inline-flex justify-center rounded-md border border-red-600 bg-red-100 px-4 py-2 text-base font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2">
+                      <button
+                        onClick={() => handleDeleteBook(book._id)}
+                        className="mx-2 btn btn-sm cursor-pointer inline-flex justify-center rounded-md border border-red-600 bg-red-100 px-4 py-2 text-base font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                      >
                         Delete
                       </button>
                     </>
