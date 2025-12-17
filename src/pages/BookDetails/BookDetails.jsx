@@ -7,10 +7,15 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 import { IoMdHeartEmpty } from "react-icons/io";
+import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
+import { TbFidgetSpinner } from "react-icons/tb";
 
 const BookDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+  const [adding, setAdding] = useState(false);
 
   const { data: bookAndSeller = {}, isLoading } = useQuery({
     queryKey: ["book-details", id],
@@ -25,10 +30,35 @@ const BookDetails = () => {
   if (isLoading) return <LoadingSpinner />;
 
   const { result: book, whoIsLibrarian } = bookAndSeller || {};
-  console.log(book, whoIsLibrarian);
+  // console.log(book, whoIsLibrarian);
 
   const closeModal = () => {
     setIsOpen(false);
+  };
+
+  console.log("bookid before addToWish", book._id)
+
+  const handleAddtoWishlist = async (bookInfo) => {
+    const favBook = { ...bookInfo, wishlister: user?.email };
+    
+    // console.log("id after receivInfo in addWishFunc", bookInfo._id)
+    // console.log(favBook)
+
+    try {
+      setAdding(true);
+
+      const res = await axiosSecure.post("/wishlist", favBook);
+      // console.log(res)
+      if (res.data.insertedId) {
+        toast.success("Book successfully added to wishlist.");
+      } else if (res.data.message) {
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setAdding(false);
+    }
   };
 
   return (
@@ -107,8 +137,19 @@ const BookDetails = () => {
           </div>
           <hr className="my-6" />
           <div className="flex justify-between items-center">
-            <button className="btn btn-outline text-base">
-              <IoMdHeartEmpty size={20} /> Add to WishList
+            <button
+              onClick={() => handleAddtoWishlist(book)}
+              className="btn btn-outline text-base"
+            >
+              {adding ? (
+                <span className="flex justify-center items-center">
+                  <TbFidgetSpinner className="animate-spin" />
+                </span>
+              ) : (
+                <>
+                  <IoMdHeartEmpty size={20} /> Add to WishList
+                </>
+              )}
             </button>
             <div>
               <Button onClick={() => setIsOpen(true)} label="Order Now" />

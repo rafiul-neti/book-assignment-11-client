@@ -6,11 +6,20 @@ import toast from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router";
 
-const PurchaseModal = ({ closeModal, isOpen, book }) => {
+const PurchaseModal = ({
+  closeModal,
+  isOpen,
+  book,
+  handleDeletefromWishlist,
+  refetch,
+  setRun,
+  run,
+}) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
-  // Total Price Calculation
+
+  // console.log("id after just erntering in Purchasing Modal", book._id, book.bookId)
 
   const {
     register,
@@ -40,7 +49,15 @@ const PurchaseModal = ({ closeModal, isOpen, book }) => {
         );
 
         closeModal();
+        if (run) {
+          handleDeletefromWishlist(book.bookId);
+          refetch();
+          setRun(false);
+        }
         navigate("/dashboard/my-orders");
+      } else if (res.data.message) {
+        toast.success(res.data.message);
+        closeModal();
       }
     } catch (error) {
       toast.error(error.message);

@@ -20,6 +20,7 @@ import AllBooks from "../pages/AllBooks/AllBooks";
 import LibrarianOnlyRoute from "./LibrarianOnlyRoute";
 import AdminOnlyRoute from "./AdminOnlyRoute";
 import UserOnlyRoutes from "./UserOnlyRoutes";
+import MyWishlist from "../pages/Dashboard/User/MyWishlist";
 
 export const router = createBrowserRouter([
   {
@@ -61,6 +62,8 @@ export const router = createBrowserRouter([
         index: true,
         element: <Statistics />,
       },
+
+      // librarian only routes
       {
         path: "add-book",
         element: (
@@ -77,6 +80,16 @@ export const router = createBrowserRouter([
           </LibrarianOnlyRoute>
         ),
       },
+      {
+        path: "manage-orders",
+        element: (
+          <LibrarianOnlyRoute>
+            <ManageOrders />
+          </LibrarianOnlyRoute>
+        ),
+      },
+
+      // admin only routes
       {
         path: "manage-users",
         element: (
@@ -97,6 +110,8 @@ export const router = createBrowserRouter([
         path: "profile",
         element: <Profile />,
       },
+
+      // user only routes
       {
         path: "my-orders",
         element: (
@@ -114,11 +129,11 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "manage-orders",
+        path: "my-wishlist",
         element: (
-          <LibrarianOnlyRoute>
-            <ManageOrders />
-          </LibrarianOnlyRoute>
+          <UserOnlyRoutes>
+            <MyWishlist />
+          </UserOnlyRoutes>
         ),
       },
     ],

@@ -14,7 +14,7 @@ const UpdateUserRoleModal = ({
   const [updatedRole, setUpdatedRole] = useState(role);
   const axiosSecure = useAxiosSecure();
 
-  console.log(userInfo);
+  // console.log(userInfo);
 
   const handleUpdateUserRole = (user) => {
     const roleInfo = { role: updatedRole };
