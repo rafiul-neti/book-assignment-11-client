@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 
@@ -31,11 +31,18 @@ const PaymentSuccess = () => {
 
   return (
     <div>
-      <h1 className="my-3 text-4xl font-bold text-green-500">Payment Successful</h1>
+      <h1 className="my-3 text-4xl font-bold text-green-500">
+        Payment Successful
+      </h1>
       <div className="my-2">
         <p>
           Your book tracking ID:{"  "}
-          <span className="font-bold">{paymentInfo.trackingId}</span>
+          <Link
+            className="hover:text-blue-600"
+            to={`/track-parcel/${paymentInfo.trackingId}`}
+          >
+            <span className="font-bold">{paymentInfo.trackingId}</span>
+          </Link>
         </p>
         <p>
           Your transaction ID:{"  "}

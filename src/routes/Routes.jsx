@@ -23,6 +23,7 @@ import UserOnlyRoutes from "./UserOnlyRoutes";
 import MyWishlist from "../pages/Dashboard/User/MyWishlist";
 import PaymentSuccess from "../pages/Dashboard/User/PaymentSuccess";
 import PaymentCancelled from "../pages/Dashboard/User/PaymentCancelled";
+import ParcelTracking from "../pages/ParcelTracking/ParcelTracking";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path: "/all-books",
         Component: AllBooks,
+      },
+      {
+        path: "track-parcel/:trackingId",
+        Component: ParcelTracking,
       },
     ],
   },

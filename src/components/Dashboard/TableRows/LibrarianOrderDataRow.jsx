@@ -15,11 +15,12 @@ const SellerOrderDataRow = ({ order, refetch }) => {
     paymentStatus,
     customerEmail,
     customerAddress,
+    trackingId,
   } = order;
 
   const handleUpdateOrderStatus = async (id, status) => {
     if (status === "cancelled") {
-      const cancelOrder = { status };
+      const cancelOrder = { status, trackingId };
 
       Swal.fire({
         title: "Do you want to cancel the order?",
@@ -44,7 +45,7 @@ const SellerOrderDataRow = ({ order, refetch }) => {
         }
       });
     } else {
-      const updateStatus = { status };
+      const updateStatus = { status, trackingId };
       setStatusUpdating(true);
       try {
         const res = await axiosSecure.patch(`/orders/${id}`, updateStatus);

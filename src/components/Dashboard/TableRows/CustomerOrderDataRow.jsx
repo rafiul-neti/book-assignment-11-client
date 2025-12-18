@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Link } from "react-router";
 
 const CustomerOrderDataRow = ({ order, refetch }) => {
   const axiosSecure = useAxiosSecure();
@@ -12,6 +13,7 @@ const CustomerOrderDataRow = ({ order, refetch }) => {
     orderStatus,
     paymentStatus,
     orderedAt,
+    trackingId,
   } = order;
 
   const handleCancelOrder = (id) => {
@@ -63,9 +65,9 @@ const CustomerOrderDataRow = ({ order, refetch }) => {
 
   const roleStyles = {
     cancelled: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
-    shipped:
-      "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
-    delivered: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
+    shipped: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+    delivered:
+      "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
   };
 
   return (
@@ -118,13 +120,23 @@ const CustomerOrderDataRow = ({ order, refetch }) => {
               </button>
             )}
 
-            <button
-              disabled={paymentStatus === "paid" ? true : false}
-              onClick={() => handlePayment(order)}
-              className="mx-1.5 btn btn-sm text-white bg-[#62ab00] disabled:bg-gray-500 disabled:text-black disabled:cursor-none"
-            >
-              Pay
-            </button>
+            <>
+              {paymentStatus === "paid" ? (
+                <Link
+                  to={`/track-parcel/${trackingId}`}
+                  className="btn btn-sm bg-[#61ab00cc] text-white"
+                >
+                  Track Parcel
+                </Link>
+              ) : (
+                <button
+                  onClick={() => handlePayment(order)}
+                  className="mx-1.5 btn btn-sm text-white bg-[#62ab00] disabled:bg-gray-500 disabled:text-black disabled:cursor-none"
+                >
+                  Pay
+                </button>
+              )}
+            </>
           </>
         )}
       </td>
