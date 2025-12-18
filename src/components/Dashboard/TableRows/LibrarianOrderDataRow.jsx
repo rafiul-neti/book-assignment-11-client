@@ -124,7 +124,9 @@ const SellerOrderDataRow = ({ order, refetch }) => {
       </td>
 
       <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
-        {paymentStatus === "paid" ? (
+        {["shipped", "delivered"].includes(orderStatus) ? (
+          <span>--</span>
+        ) : paymentStatus === "paid" ? (
           <button
             onClick={handleRefund}
             className="btn btn-sm bg-amber-100 text-[#bd0018]"

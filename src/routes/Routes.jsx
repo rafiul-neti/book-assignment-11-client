@@ -22,6 +22,7 @@ import AdminOnlyRoute from "./AdminOnlyRoute";
 import UserOnlyRoutes from "./UserOnlyRoutes";
 import MyWishlist from "../pages/Dashboard/User/MyWishlist";
 import PaymentSuccess from "../pages/Dashboard/User/PaymentSuccess";
+import PaymentCancelled from "../pages/Dashboard/User/PaymentCancelled";
 
 export const router = createBrowserRouter([
   {
@@ -142,6 +143,14 @@ export const router = createBrowserRouter([
         element: (
           <UserOnlyRoutes>
             <PaymentSuccess />
+          </UserOnlyRoutes>
+        ),
+      },
+      {
+        path: "payment-cancelled",
+        element: (
+          <UserOnlyRoutes>
+            <PaymentCancelled />
           </UserOnlyRoutes>
         ),
       },

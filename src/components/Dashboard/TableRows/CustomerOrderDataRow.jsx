@@ -50,7 +50,7 @@ const CustomerOrderDataRow = ({ order, refetch }) => {
       customerEmail: orderInfo.customerEmail,
     };
 
-    console.log(bookInfo);
+    // console.log(bookInfo);
 
     try {
       const res = await axiosSecure.post(`/payment-checkout-session`, bookInfo);
@@ -59,6 +59,13 @@ const CustomerOrderDataRow = ({ order, refetch }) => {
     } catch (error) {
       toast.error(error.message);
     }
+  };
+
+  const roleStyles = {
+    cancelled: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
+    shipped:
+      "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+    delivered: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
   };
 
   return (
@@ -90,15 +97,7 @@ const CustomerOrderDataRow = ({ order, refetch }) => {
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <p
-          className={`${
-            orderStatus === "cancelled"
-              ? "text-red-600"
-              : orderStatus === "shipped"
-              ? "text-[#7ED321]"
-              : orderStatus === "delivered"
-              ? "text-green-700"
-              : "text-gray-900"
-          } capitalize font-bold`}
+          className={`${roleStyles[orderStatus]} capitalize rounded-full px-3 py-1 text-sm font-medium`}
         >
           {orderStatus}
         </p>
