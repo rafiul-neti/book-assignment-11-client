@@ -41,6 +41,26 @@ const CustomerOrderDataRow = ({ order, refetch }) => {
     });
   };
 
+  const handlePayment = async (orderInfo) => {
+    const bookInfo = {
+      bookId: orderInfo.bookId,
+      bookPrice: Number(bookPrice),
+      bookName,
+      trackingId: orderInfo.trackingId,
+      customerEmail: orderInfo.customerEmail,
+    };
+
+    console.log(bookInfo);
+
+    try {
+      const res = await axiosSecure.post(`/payment-checkout-session`, bookInfo);
+      const { url } = res.data;
+      window.location.assign(url);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   return (
     <tr>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -101,6 +121,7 @@ const CustomerOrderDataRow = ({ order, refetch }) => {
 
             <button
               disabled={paymentStatus === "paid" ? true : false}
+              onClick={() => handlePayment(order)}
               className="mx-1.5 btn btn-sm text-white bg-[#62ab00] disabled:bg-gray-500 disabled:text-black disabled:cursor-none"
             >
               Pay

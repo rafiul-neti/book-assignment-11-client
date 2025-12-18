@@ -21,6 +21,7 @@ import LibrarianOnlyRoute from "./LibrarianOnlyRoute";
 import AdminOnlyRoute from "./AdminOnlyRoute";
 import UserOnlyRoutes from "./UserOnlyRoutes";
 import MyWishlist from "../pages/Dashboard/User/MyWishlist";
+import PaymentSuccess from "../pages/Dashboard/User/PaymentSuccess";
 
 export const router = createBrowserRouter([
   {
@@ -133,6 +134,14 @@ export const router = createBrowserRouter([
         element: (
           <UserOnlyRoutes>
             <MyWishlist />
+          </UserOnlyRoutes>
+        ),
+      },
+      {
+        path: "payment-success",
+        element: (
+          <UserOnlyRoutes>
+            <PaymentSuccess />
           </UserOnlyRoutes>
         ),
       },
