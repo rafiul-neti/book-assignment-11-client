@@ -82,7 +82,7 @@ const CustomerOrderDataRow = ({
 
   return (
     <tr>
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+      <td className="px-1.5 py-2.5 border-b border-gray-200 bg-white text-sm">
         <div className="flex">
           <div className="">
             <div className="flex gap-2">
@@ -105,14 +105,14 @@ const CustomerOrderDataRow = ({
         </div>
       </td>
 
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+      <td className="px-1.5 py-2.5 border-b border-gray-200 bg-white text-sm">
         <p className="text-gray-900">
           <p className="text-gray-900">
             {new Date(orderedAt).toLocaleDateString()}
           </p>
         </p>
       </td>
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+      <td className="px-1.5 py-2.5 border-b border-gray-200 bg-white text-sm">
         {paymentStatus === "paid" ? (
           <Link
             to={`/track-parcel/${trackingId}`}
@@ -126,14 +126,14 @@ const CustomerOrderDataRow = ({
           </span>
         )}
       </td>
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+      <td className="px-1.5 py-2.5 border-b border-gray-200 bg-white text-sm">
         <p
           className={`${roleStyles[orderStatus]} capitalize rounded-full px-3 py-1 text-sm font-medium`}
         >
           {orderStatus}
         </p>
       </td>
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+      <td className="px-1.5 py-2.5 flex items-center gap-0.5 border-b border-gray-200 bg-white text-sm">
         {orderStatus === "cancelled" ? (
           "--"
         ) : (
@@ -161,11 +161,11 @@ const CustomerOrderDataRow = ({
         )}
       </td>
 
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+      <td className="px-1.5 py-2.5 border-b border-gray-200 bg-white text-sm">
         <button
           disabled={orderStatus !== "delivered" ? true : false}
           onClick={handleRatingFromDashboard}
-          className="mx-1.5 btn btn-sm text-white bg-[#62ab00] disabled:bg-gray-500 disabled:text-black disabled:cursor-none"
+          className="mx-1.5 btn btn-sm text-white bg-[#62ab00] disabled:bg-gray-500 disabled:text-black disabled:cursor-none text-nowrap"
         >
           Rate the Product
         </button>

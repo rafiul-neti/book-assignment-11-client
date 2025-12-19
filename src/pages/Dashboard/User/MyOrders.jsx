@@ -49,39 +49,39 @@ const MyOrders = () => {
                     <tr>
                       <th
                         scope="col"
-                        className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-bold"
+                        className="px-1.5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-bold"
                       >
                         Book Info.
                       </th>
 
                       <th
                         scope="col"
-                        className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-bold"
+                        className="px-1.5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-bold"
                       >
                         Order Date
                       </th>
                       <th
                         scope="col"
-                        className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-bold"
+                        className="px-1.5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-bold"
                       >
                         Track Order
                       </th>
                       <th
                         scope="col"
-                        className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-bold"
+                        className="px-1.5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-bold"
                       >
                         Status
                       </th>
 
                       <th
                         scope="col"
-                        className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-bold"
+                        className="px-1.5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-bold"
                       >
                         Action
                       </th>
                       <th
                         scope="col"
-                        className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-bold"
+                        className="px-1.5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-bold"
                       >
                         Rating & Review
                       </th>

@@ -257,7 +257,7 @@ const BookDetails = () => {
                 <div className="flex gap-2.5 md:gap-5 lg:gap-10 items-center">
                   <div className="">
                     <img
-                      src={book.bookImage}
+                      src={user?.photoURL}
                       alt=""
                       className="object-cover rounded-full h-14 w-14 lg:h-20 lg:w-20"
                     />
