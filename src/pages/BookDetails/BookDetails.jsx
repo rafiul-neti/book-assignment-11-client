@@ -2,7 +2,7 @@ import Container from "../../components/Shared/Container";
 import Button from "../../components/Shared/Button/Button";
 import PurchaseModal from "../../components/Modal/PurchaseModal";
 import { useState } from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
@@ -10,12 +10,14 @@ import { IoMdHeartEmpty } from "react-icons/io";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
+import ReviewRatingModal from "../../components/Modal/ReviewRatingModal";
 
 const BookDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [adding, setAdding] = useState(false);
+  const [rating, setRating] = useState(0);
 
   const { data: bookAndSeller = {}, isLoading } = useQuery({
     queryKey: ["book-details", id],
@@ -26,6 +28,7 @@ const BookDetails = () => {
   });
 
   let [isOpen, setIsOpen] = useState(false);
+  const [isReviewOpen, setIsReviewOpen] = useState(false);
 
   if (isLoading) return <LoadingSpinner />;
 
@@ -36,11 +39,16 @@ const BookDetails = () => {
     setIsOpen(false);
   };
 
-  console.log("bookid before addToWish", book._id)
+  const closeReviewModal = () => {
+    setIsReviewOpen(false);
+    setRating(0);
+  };
+
+  console.log("bookid before addToWish", book._id);
 
   const handleAddtoWishlist = async (bookInfo) => {
     const favBook = { ...bookInfo, wishlister: user?.email };
-    
+
     // console.log("id after receivInfo in addWishFunc", bookInfo._id)
     // console.log(favBook)
 
@@ -160,6 +168,87 @@ const BookDetails = () => {
           <PurchaseModal closeModal={closeModal} isOpen={isOpen} book={book} />
         </div>
       </div>
+
+      {/* review and rating section */}
+      <div className="my-10">
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl text-[#333333] font-semibold">
+            Reviews and Ratings
+          </h1>
+          {!user && (
+            <div className="flex items-center gap-7">
+              <h3 className="text-xl font-medium">
+                Please login to write review
+              </h3>
+              <Link
+                to={`/login`}
+                className="btn btn-outline text-[#bd0018] outline-[#bd0018] text-base font-medium"
+              >
+                Login
+              </Link>
+            </div>
+          )}
+        </div>
+
+        <div className="my-9 flex justify-between items-center">
+          {user && (
+            <div className="">
+              <select
+                onChange={(e) => setRating(e.target.value)}
+                defaultValue={rating}
+                className="select border-2 border-lime-300 focus:outline-[#62ab00]"
+              >
+                <option disabled value={0}>
+                  Select Your Rating
+                </option>
+                <option value="1">1 Star - Very Bad</option>
+                <option value="2">2 Star - Bad</option>
+                <option value="3">3 Star - Good</option>
+                <option value="4">4 Star - Very Good</option>
+                <option value="5">5 Star - Good & Recommended</option>
+              </select>
+
+              <button
+                onClick={() => setIsReviewOpen(true)}
+                className="my-3 btn btn-outline outline-blue-500 text-blue-700 hover:bg-blue-500 hover:text-white"
+              >
+                Write a Review
+              </button>
+            </div>
+          )}
+
+          <div className="space-y-1.5">
+            <h1>Avg Rating</h1>
+            <p>Avg rating star</p>
+          </div>
+        </div>
+
+        <div className="">
+          <div className="">
+            <div className="">
+              <img src="" alt="" />
+            </div>
+            <div className="">
+              <p>By Name Date</p>
+              <p>Rating stars</p>
+            </div>
+          </div>
+
+          <div className="">
+            <p>review text</p>
+          </div>
+        </div>
+      </div>
+
+      <>
+        <ReviewRatingModal
+          book={book}
+          isOpen={isReviewOpen}
+          closeModal={closeReviewModal}
+          rating={rating}
+          setRating={setRating}
+        />
+      </>
     </Container>
   );
 };

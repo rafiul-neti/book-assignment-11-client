@@ -4,6 +4,7 @@ import Coverage from "./Coverage";
 import FAQ from "./FAQ";
 import LatestBooks from "./LatestBooks";
 import Testimonial from "./Testimonial";
+import WhyChoose from "./WhyChoose";
 
 const Home = () => {
   return (
@@ -18,6 +19,11 @@ const Home = () => {
 
       {/* animated section */}
       <BrandMarquee />
+
+      {/* why choose us */}
+      <section className="my-10 bg-gray-300 p-3">
+        <WhyChoose />
+      </section>
 
       {/* customer review */}
       <Testimonial />

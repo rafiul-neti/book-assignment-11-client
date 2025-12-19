@@ -7,7 +7,7 @@ const Star = ({ star }) => {
     let num = ind + 0.5;
 
     return (
-      <span>
+      <span key={ind}>
         {star >= ind + 1 ? (
           <FaStar className="icon" />
         ) : star >= num ? (
