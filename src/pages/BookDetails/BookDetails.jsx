@@ -28,7 +28,11 @@ const BookDetails = () => {
     },
   });
 
-  const { data, isLoading: ratingLoading } = useQuery({
+  const {
+    data,
+    isLoading: ratingLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["review", "rating", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/ratings-reviews/${id}`);
@@ -53,6 +57,7 @@ const BookDetails = () => {
   const closeReviewModal = () => {
     setIsReviewOpen(false);
     setRating(0);
+    refetch();
   };
 
   // console.log(avgRating);
@@ -229,7 +234,9 @@ const BookDetails = () => {
           )}
 
           <div className="space-y-1.5 mx-auto">
-            <h1 className="text-5xl font-medium text-center">{String(avgRating.toFixed(1))}</h1>
+            <h1 className="text-5xl font-medium text-center">
+              {String(avgRating.toFixed(1))}
+            </h1>
             <Star star={String(avgRating)} size={20} />
           </div>
         </div>
