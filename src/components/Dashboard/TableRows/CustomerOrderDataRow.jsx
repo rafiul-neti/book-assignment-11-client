@@ -3,7 +3,12 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { Link } from "react-router";
 
-const CustomerOrderDataRow = ({ order, refetch }) => {
+const CustomerOrderDataRow = ({
+  order,
+  refetch,
+  setBookToReview,
+  setIsReviewOpen,
+}) => {
   const axiosSecure = useAxiosSecure();
 
   const {
@@ -63,6 +68,11 @@ const CustomerOrderDataRow = ({ order, refetch }) => {
     }
   };
 
+  const handleRatingFromDashboard = () => {
+    setBookToReview(order);
+    setIsReviewOpen(true);
+  };
+
   const roleStyles = {
     cancelled: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
     shipped: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
@@ -73,29 +83,48 @@ const CustomerOrderDataRow = ({ order, refetch }) => {
   return (
     <tr>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <div className="flex items-center">
-          <div className="shrink-0">
-            <div className="block relative">
+        <div className="flex">
+          <div className="">
+            <div className="flex gap-2">
               <img
                 alt="profile"
                 src={bookImage}
-                className="mx-auto object-cover rounded h-10 w-15 "
+                className="mx-auto object-cover rounded h-10 w-15"
               />
+              <div className="text-left">
+                <Link
+                  to={`/book/${order.bookId}`}
+                  className="text-left font-semibold text-base hover:text-blue-400"
+                >
+                  {bookName}
+                </Link>
+                <p className="text-left">TK.{bookPrice}</p>
+              </div>
             </div>
           </div>
         </div>
       </td>
 
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <p className="text-gray-900">{bookName}</p>
-      </td>
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <p className="text-gray-900">TK.{bookPrice}</p>
-      </td>
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <p className="text-gray-900">
-          {new Date(orderedAt).toLocaleDateString()}
+          <p className="text-gray-900">
+            {new Date(orderedAt).toLocaleDateString()}
+          </p>
         </p>
+      </td>
+      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        {paymentStatus === "paid" ? (
+          <Link
+            to={`/track-parcel/${trackingId}`}
+            className="btn btn-sm bg-[#61ab00cc] text-white"
+          >
+            Track Parcel
+          </Link>
+        ) : (
+          <span className="text-sm text-blue-500 font-semibold">
+            Please pay to track the parcel
+          </span>
+        )}
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <p
@@ -104,7 +133,6 @@ const CustomerOrderDataRow = ({ order, refetch }) => {
           {orderStatus}
         </p>
       </td>
-
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         {orderStatus === "cancelled" ? (
           "--"
@@ -121,24 +149,26 @@ const CustomerOrderDataRow = ({ order, refetch }) => {
             )}
 
             <>
-              {paymentStatus === "paid" ? (
-                <Link
-                  to={`/track-parcel/${trackingId}`}
-                  className="btn btn-sm bg-[#61ab00cc] text-white"
-                >
-                  Track Parcel
-                </Link>
-              ) : (
-                <button
-                  onClick={() => handlePayment(order)}
-                  className="mx-1.5 btn btn-sm text-white bg-[#62ab00] disabled:bg-gray-500 disabled:text-black disabled:cursor-none"
-                >
-                  Pay
-                </button>
-              )}
+              <button
+                disabled={paymentStatus === "paid" ? true : false}
+                onClick={() => handlePayment(order)}
+                className="mx-1.5 btn btn-sm text-white bg-[#62ab00] disabled:bg-gray-500 disabled:text-black disabled:cursor-none"
+              >
+                Pay
+              </button>
             </>
           </>
         )}
+      </td>
+
+      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        <button
+          disabled={orderStatus !== "delivered" ? true : false}
+          onClick={handleRatingFromDashboard}
+          className="mx-1.5 btn btn-sm text-white bg-[#62ab00] disabled:bg-gray-500 disabled:text-black disabled:cursor-none"
+        >
+          Rate the Product
+        </button>
       </td>
     </tr>
   );

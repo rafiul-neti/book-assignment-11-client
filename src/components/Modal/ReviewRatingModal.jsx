@@ -5,10 +5,12 @@ import Star from "../Shared/Star/Star";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import { TbFidgetSpinner } from "react-icons/tb";
 
 const ReviewRatingModal = ({ isOpen, closeModal, book, rating, setRating }) => {
-  const { bookImage, bookName, bookAuthor, bookPrice, _id } = book;
+  const { bookImage, bookName, bookAuthor, bookPrice } = book;
   const [ratingError, setRatingError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
@@ -19,15 +21,20 @@ const ReviewRatingModal = ({ isOpen, closeModal, book, rating, setRating }) => {
       return setRatingError("Please give the rating.");
     }
 
+    const bookId = book.bookId ? book.bookId : book._id;
+    console.log(bookId);
+
     // console.log(data);
     const reviewInfo = {
-      bookId: _id,
-      reviewer: user.email,
-      givenRating: rating,
+      bookId,
+      reviewerEmail: user.email,
+      reviewerName: user.displayName,
+      givenRating: Number(rating),
       ...data,
     };
 
     try {
+      setSubmitting(true);
       const res = await axiosSecure.post(`/ratings-reviews`, reviewInfo);
       if (res.data.insertedId) {
         toast.success("Your review has been submitted.");
@@ -38,6 +45,7 @@ const ReviewRatingModal = ({ isOpen, closeModal, book, rating, setRating }) => {
       toast.error(error.message);
     } finally {
       closeModal();
+      setSubmitting(false);
     }
   };
 
@@ -102,7 +110,7 @@ const ReviewRatingModal = ({ isOpen, closeModal, book, rating, setRating }) => {
                   <option value="5">5 Star - Good & Recommended</option>
                 </select>
               ) : (
-                <Star star={rating} />
+                <Star star={rating} size={36} />
               )}
             </div>
 
@@ -123,21 +131,34 @@ const ReviewRatingModal = ({ isOpen, closeModal, book, rating, setRating }) => {
             )}
 
             <div className="flex mt-4 justify-around">
-              <button
-                type="button"
-                className="btn btn-outline outline-blue-600 cursor-pointer inline-flex justify-center rounded-md px-7 py-2 text-lg font-medium text-blue-600 hover:bg-blue-600 hover:text-white"
-                onClick={closeModal}
-              >
-                Cancel
-              </button>
+              {submitting ? (
+                <button className="btn btn-block bg-blue-500">
+                  <span>
+                    <TbFidgetSpinner
+                      size={20}
+                      className="text-white animate-spin"
+                    />
+                  </span>
+                </button>
+              ) : (
+                <>
+                  <button
+                    type="button"
+                    className="btn btn-outline outline-blue-600 cursor-pointer inline-flex justify-center rounded-md px-7 py-2 text-lg font-medium text-blue-600 hover:bg-blue-600 hover:text-white"
+                    onClick={closeModal}
+                  >
+                    Cancel
+                  </button>
 
-              <button
-                onClick={handleSubmit(handleSubmitReviewRating)}
-                type="button"
-                className="btn cursor-pointer inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-7 py-2 text-lg font-medium text-white hover:opacity-80"
-              >
-                Submit
-              </button>
+                  <button
+                    onClick={handleSubmit(handleSubmitReviewRating)}
+                    type="button"
+                    className="btn cursor-pointer inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-7 py-2 text-lg font-medium text-white hover:opacity-80"
+                  >
+                    Submit
+                  </button>
+                </>
+              )}
             </div>
           </DialogPanel>
         </div>

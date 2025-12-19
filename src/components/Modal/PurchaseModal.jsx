@@ -36,6 +36,7 @@ const PurchaseModal = ({
       bookName: book.bookName,
       bookImage: book.bookImage,
       bookPrice: book.bookPrice,
+      bookAuthor: book.bookAuthor,
       orderedAt: new Date(),
       ...data,
     };

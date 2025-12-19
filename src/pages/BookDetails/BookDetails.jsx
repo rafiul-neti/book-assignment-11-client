@@ -11,6 +11,7 @@ import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
 import ReviewRatingModal from "../../components/Modal/ReviewRatingModal";
+import Star from "../../components/Shared/Star/Star";
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -27,10 +28,20 @@ const BookDetails = () => {
     },
   });
 
+  const { data, isLoading: ratingLoading } = useQuery({
+    queryKey: ["review", "rating", id],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/ratings-reviews/${id}`);
+      return res.data;
+    },
+  });
+
   let [isOpen, setIsOpen] = useState(false);
   const [isReviewOpen, setIsReviewOpen] = useState(false);
 
-  if (isLoading) return <LoadingSpinner />;
+  const { result: ratingsAndReviews = [], avgRating } = data || {};
+
+  if (isLoading || ratingLoading) return <LoadingSpinner />;
 
   const { result: book, whoIsLibrarian } = bookAndSeller || {};
   // console.log(book, whoIsLibrarian);
@@ -44,7 +55,7 @@ const BookDetails = () => {
     setRating(0);
   };
 
-  console.log("bookid before addToWish", book._id);
+  // console.log(avgRating);
 
   const handleAddtoWishlist = async (bookInfo) => {
     const favBook = { ...bookInfo, wishlister: user?.email };
@@ -190,7 +201,7 @@ const BookDetails = () => {
           )}
         </div>
 
-        <div className="my-9 flex justify-between items-center">
+        <div className="my-9 flex justify-between items-center flex-col lg:flex-row">
           {user && (
             <div className="">
               <select
@@ -217,27 +228,60 @@ const BookDetails = () => {
             </div>
           )}
 
-          <div className="space-y-1.5">
-            <h1>Avg Rating</h1>
-            <p>Avg rating star</p>
+          <div className="space-y-1.5 mx-auto">
+            <h1 className="text-5xl font-medium text-center">{String(avgRating.toFixed(1))}</h1>
+            <Star star={String(avgRating)} size={20} />
           </div>
         </div>
 
-        <div className="">
+        {!ratingsAndReviews.length ? (
           <div className="">
-            <div className="">
-              <img src="" alt="" />
-            </div>
-            <div className="">
-              <p>By Name Date</p>
-              <p>Rating stars</p>
-            </div>
+            <h2 className="text-center text-gray-500 font-bold text-3xl">
+              No one has reviewed this book yet.
+            </h2>
           </div>
+        ) : (
+          <div className="my-16 bg-gray-200 grid grid-cols-1 gap-7 md:gap-10 p-2 md:p-5 lg:p-7 rounded">
+            {ratingsAndReviews.map((rAndr) => (
+              <div
+                key={rAndr._id}
+                className="shadow-2xl rounded-lg bg-white px-5 lg:px-10 py-2 lg:py-5"
+              >
+                <div className="flex gap-2.5 md:gap-5 lg:gap-10 items-center">
+                  <div className="">
+                    <img
+                      src={book.bookImage}
+                      alt=""
+                      className="object-cover rounded-full h-14 w-14 lg:h-20 lg:w-20"
+                    />
+                  </div>
+                  <div className="">
+                    <p className="my-1.5">
+                      <span className="text-gray-700">By</span>
+                      {"  "}
+                      <span className="text-lg font-bold">
+                        {rAndr.reviewerName}
+                      </span>{" "}
+                      <span className="text-gray-700">
+                        {new Date(rAndr.reviewedAt).toLocaleDateString(
+                          "en-GB",
+                          {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                          }
+                        )}
+                      </span>
+                    </p>
+                    <Star star={Number(rAndr.givenRating)} size={15} />
+                  </div>
+                </div>
 
-          <div className="">
-            <p>review text</p>
+                <div className="my-7">{rAndr.reviewText}</div>
+              </div>
+            ))}
           </div>
-        </div>
+        )}
       </div>
 
       <>

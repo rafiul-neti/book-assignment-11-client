@@ -1,12 +1,17 @@
+import { useState } from "react";
 import CustomerOrderDataRow from "../../../components/Dashboard/TableRows/CustomerOrderDataRow";
+import ReviewRatingModal from "../../../components/Modal/ReviewRatingModal";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 
 const MyOrders = () => {
+  const [rating, setRating] = useState(0);
+  const [isReviewOpen, setIsReviewOpen] = useState(false);
+  const [bookToReview, setBookToReview] = useState({});
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-  
+
   const { data: orders = [], refetch } = useQuery({
     queryKey: ["my-orders", user?.email, "customerEmail"],
     queryFn: async () => {
@@ -14,6 +19,11 @@ const MyOrders = () => {
       return res.data;
     },
   });
+
+  const closeReviewModal = () => {
+    setIsReviewOpen(false);
+    setRating(0);
+  };
 
   return (
     <>
@@ -41,25 +51,20 @@ const MyOrders = () => {
                         scope="col"
                         className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-bold"
                       >
-                        Image
+                        Book Info.
                       </th>
-                      <th
-                        scope="col"
-                        className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-bold"
-                      >
-                        Book Name
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-bold"
-                      >
-                        Price
-                      </th>
+
                       <th
                         scope="col"
                         className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-bold"
                       >
                         Order Date
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-bold"
+                      >
+                        Track Order
                       </th>
                       <th
                         scope="col"
@@ -74,6 +79,12 @@ const MyOrders = () => {
                       >
                         Action
                       </th>
+                      <th
+                        scope="col"
+                        className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-bold"
+                      >
+                        Rating & Review
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -82,6 +93,8 @@ const MyOrders = () => {
                         key={order._id}
                         order={order}
                         refetch={refetch}
+                        setBookToReview={setBookToReview}
+                        setIsReviewOpen={setIsReviewOpen}
                       />
                     ))}
                   </tbody>
@@ -91,6 +104,14 @@ const MyOrders = () => {
           </div>
         </div>
       )}
+
+      <ReviewRatingModal
+        isOpen={isReviewOpen}
+        closeModal={closeReviewModal}
+        book={bookToReview}
+        rating={rating}
+        setRating={setRating}
+      />
     </>
   );
 };
