@@ -1,16 +1,14 @@
-import Container from "../Container";
 import { AiOutlineMenu } from "react-icons/ai";
 import { useState } from "react";
 import { Link, NavLink } from "react-router";
 import useAuth from "../../../hooks/useAuth";
 import avatarImg from "../../../assets/images/placeholder.jpg";
-import { useTheme } from "next-themes";
 import toast from "react-hot-toast";
-// import logo from '../../../assets/images/logo-flat.png'
+import Logo from "../../../assets/banner/Logo.png";
+
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
 
   const handleLogout = () => {
     logOut().then(() => {
@@ -21,17 +19,17 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <NavLink to={`/`} className={`text-base font-medium`}>
+        <NavLink to={`/`} className={`text-lg font-medium merriweather`}>
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink to={`/all-books`} className={`text-base font-medium`}>
+        <NavLink to={`/all-books`} className={`text-lg font-medium merriweather`}>
           All Books
         </NavLink>
       </li>
       <li>
-        <NavLink to={`/dashboard`} className={`text-base font-medium`}>
+        <NavLink to={`/dashboard`} className={`text-lg font-medium merriweather`}>
           Dashboard
         </NavLink>
       </li>
@@ -39,7 +37,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="fixed navbar bg-white z-10 shadow-sm">
+    <div className="fixed navbar z-50 bg-white shadow-sm">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -66,8 +64,16 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <Link to={`/`} className="text-3xl font-bold text-[#62ab00]">
-          BookCourier.
+        <Link to={`/`} className="flex items-center">
+          <img
+            src={Logo}
+            className="h-8 sm:h-9 lg:h-24 w-auto object-contain"
+            alt=""
+          />
+          <h2 className="text-4xl font-black transition-all duration-300 hover:tracking-wide">
+            Book
+            <span className="text-[#62ab00]">Courier</span>
+          </h2>
         </Link>
       </div>
 
@@ -84,10 +90,10 @@ const Navbar = () => {
               className="p-4 md:py-1 md:px-2 border border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition"
             >
               <AiOutlineMenu />
-              <div className="hidden md:block">
+              <div className="hidden md:block aspect-square">
                 {/* Avatar */}
                 <img
-                  className="rounded-full"
+                  className="object-center rounded-full"
                   referrerPolicy="no-referrer"
                   src={user && user.photoURL ? user.photoURL : avatarImg}
                   alt="profile"
@@ -113,21 +119,6 @@ const Navbar = () => {
                       className="px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer"
                     >
                       Logout
-                    </div>
-                    <div className="">
-                      <label className="my-2 flex items-center gap-2 cursor-pointer text-base-content">
-                        <span className="text-sm">
-                          {theme === "light" ? "🌙 Dark" : "☀️ Light"}
-                        </span>
-                        <input
-                          type="checkbox"
-                          className="toggle toggle-primary"
-                          onChange={(e) =>
-                            setTheme(e.target.checked ? "dark" : "light")
-                          }
-                          // checked={theme === "dark"}
-                        />
-                      </label>
                     </div>
                   </>
                 ) : (

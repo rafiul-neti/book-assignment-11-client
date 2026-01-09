@@ -1,7 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap");
+
 @import "tailwindcss";
-@custom-variant dark (&:where(.dark, .dark *));
 
 @plugin "daisyui";
+
+.lato-regular {
+  font-family: "Lato", sans-serif;
+}
+
+.merriweather {
+  font-family: "Merriweather", serif;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Merriweather", serif;
+}
 
 .icon {
   /* font-size: 2rem; */
@@ -36,5 +56,5 @@ td p {
 }
 
 a.active {
-  @apply text-[#62ab00] bg-green-50
+  @apply text-[#62ab00] font-extrabold;
 }

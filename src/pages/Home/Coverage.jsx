@@ -29,7 +29,7 @@ const Coverage = () => {
   };
 
   return (
-    <section className="my-10 bg-white min-h-screen max-w-7xl mx-auto p-1 md:p-3 lg:p-16 rounded-2xl">
+    <section className="my-10 bg-white min-h-screen max-w-7xl mx-auto p-1 md:p-3 lg:p-16 rounded-2xl z-0">
       <h1 className="text-2xl md:text-3xl lg:text-5xl text-[#62ab00] font-bold">
         We are available in 64 districts
       </h1>

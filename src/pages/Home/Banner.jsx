@@ -1,73 +1,93 @@
-import React from "react";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Link } from "react-router";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
 
-const Banner = () => {
+// Asset imports
+import delivery from "../../assets/banner/delivery.jpeg";
+import relax from "../../assets/banner/relax.jpg";
+import research from "../../assets/banner/research.JPG";
+
+import "swiper/css";
+import "swiper/css/pagination";
+
+const BannerSlider = () => {
+  const slides = [
+    {
+      id: 1,
+      image: delivery,
+      title: "Books Delivered to Your Doorstep",
+      description:
+        "Order books from trusted libraries and receive them at home without visiting.",
+      buttonText: "Browse All Books",
+    },
+    {
+      id: 2,
+      image: research,
+      title: "Built for Students & Researchers",
+      description: "Access academic and research books easily from anywhere.",
+      buttonText: "Explore Books",
+    },
+    {
+      id: 3,
+      image: relax,
+      title: "Search, Order & Relax at Home",
+      description:
+        "We manage book collection and delivery so you can focus on learning.",
+      buttonText: "How It Works",
+    },
+  ];
+
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index, className) {
+      // Using daisyUI 'btn' classes for the numbered bullets
+      return `<span class="${className} !w-5 !h-5 text-sm !bg-primary !text-white flex items-center justify-center font-bold rounded-full opacity-100">${
+        index + 1
+      }</span>`;
+    },
+  };
+
   return (
-    <Carousel
-      autoPlay={true}
-      interval={2800}
-      infiniteLoop={true}
-      showThumbs={false}
-    >
-      <div className="flex items-center">
-        <div className="flex-1 space-y-4">
-          <h1 className="text-xl lg:text-3xl font-bold text-[#bd0018]">
-            Connect With 100+ Libraries
-          </h1>
-          <p className="text-[#333333] hidden lg:block">
-            Explore academic, public, and research libraries from one platform.
-          </p>
-          <Link to={`/all-books`} className="btn bg-[#62ab00] text-white">
-            Browse All Books
-          </Link>
-        </div>
+    <section className="w-full pt-28 bg-base-100 overflow-hidden relative">
+      <Swiper
+        modules={[Autoplay, Pagination]}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        pagination={pagination}
+        loop={true}
+        className="mySwiper"
+      >
+        {slides.map((slide) => (
+          <SwiperSlide key={slide.id}>
+            <div className="flex flex-col lg:flex-row items-center min-h-[65vh] lg:min-h-[80vh]">
+              {/* Left Side: Content */}
+              <div className="w-full lg:w-1/2 flex justify-center items-center p-8 lg:p-20 order-2 lg:order-1">
+                <div className="max-w-xl text-center lg:text-left">
+                  <h1 className="text-4xl lg:text-6xl font-extrabold text-base-content leading-tight">
+                    {slide.title}
+                  </h1>
+                  <p className="py-8 text-lg lg:text-xl text-base-content/70 font-medium">
+                    {slide.description}
+                  </p>
+                  <button className="btn btn-primary btn-lg shadow-lg">
+                    {slide.buttonText}
+                  </button>
+                </div>
+              </div>
 
-        <div className="flex-1">
-          <img src="https://plus.unsplash.com/premium_photo-1695942301094-472c4dbf9130?fm=jpg&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bGlicmFyeSUyMHNoZWx2ZXN8ZW58MHx8MHx8fDA%3D&ixlib=rb-4.1.0&q=60&w=3000" />
-        </div>
-      </div>
-
-      <div className="flex items-center">
-        <div className="flex-1 space-y-4">
-          <h1 className="text-xl lg:text-3xl font-bold text-[#bd0018]">
-            Books for Every Subject & Field
-          </h1>
-          <p className="text-[#333333] hidden lg:block">
-            From literature to research journals — find everything you need
-          </p>
-          <Link to={`/all-books`} className="btn bg-[#62ab00] text-white">
-            View Collection
-          </Link>
-        </div>
-
-        <div className="flex-1">
-          <img src="https://freerangestock.com/sample/160529/stack-of-vintage-old-books-on-table.jpg" />
-        </div>
-      </div>
-
-      <div className="flex items-center">
-        <div className="flex-1 space-y-4">
-          <h1 className="text-[#bd0018] text-xl lg:text-3xl font-bold">
-            {" "}
-            Get Any Book Delivered to Your Home
-          </h1>
-          <p className="text-[#333333] hidden lg:block">
-            Borrow books from partnered libraries and get them delivered
-            anywhere.
-          </p>
-          <Link to={`/all-books`} className="btn bg-[#62ab00] text-white">
-            Browse All Books
-          </Link>
-        </div>
-
-        <div className="flex-1">
-          <img src="https://png.pngtree.com/png-vector/20241107/ourlarge/pngtree-clean-and-inspiring-study-table-setup-with-books-pencils-greenery-perfect-png-image_14315384.png" />
-        </div>
-      </div>
-    </Carousel>
+              {/* Right Side: Image */}
+              <div className="w-full lg:w-1/2 h-[40vh] lg:h-[80vh] order-1 lg:order-2">
+                <img
+                  src={slide.image}
+                  alt={slide.title}
+                  className="w-full h-full object-cover object-center"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </section>
   );
 };
 
-export default Banner;
+export default BannerSlider;

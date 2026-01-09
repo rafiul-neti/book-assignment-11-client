@@ -5,7 +5,7 @@ const Bookcard = ({ book }) => {
   return (
     <Link
       to={`/book/${book._id}`}
-      className="col-span-1 cursor-pointer group shadow-xl p-3 rounded-xl bg-gray-50"
+      className="col-span-1 cursor-pointer group shadow-sm p-3 rounded-xl bg-gray-50"
     >
       <div className="flex flex-col gap-2 w-full">
         <div
