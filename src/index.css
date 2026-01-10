@@ -44,11 +44,11 @@ td p {
 }
 
 .benefits-cards {
-  @apply flex flex-col lg:flex-row items-center gap-24 bg-white rounded-xl p-8;
+  @apply flex flex-col lg:flex-row items-center gap-24 bg-[#f5f0f0] rounded-xl p-8;
 }
 
 .benefits-h1 {
-  @apply text-[#bd0018] font-bold text-2xl my-3;
+  @apply text-[#62ab00] font-black text-2xl my-3;
 }
 
 .benefits-p {

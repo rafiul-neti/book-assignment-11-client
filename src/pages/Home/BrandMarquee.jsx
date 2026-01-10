@@ -12,7 +12,7 @@ const brands = [Brand1, Brand2, Brand3, Brand4, Brand5, Brand6, Brand7];
 
 const BrandMarquee = () => {
   return (
-    <div className="">
+    <div className="my-20">
       <Marquee>
         <div className="flex items-center gap-10">
           {brands.map((brand, ind) => (

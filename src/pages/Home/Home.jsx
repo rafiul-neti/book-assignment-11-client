@@ -4,6 +4,8 @@ import Coverage from "./Coverage";
 import FAQ from "./FAQ";
 import HowItWorks from "./HowItWorks";
 import LatestBooks from "./LatestBooks";
+import LibraryOwnerSection from "./LibraryOwnerSection";
+import Partners from "./LibraryOwnerSection";
 import Testimonial from "./Testimonial";
 import WhyChoose from "./WhyChoose";
 
@@ -15,11 +17,13 @@ const Home = () => {
         {/* latest books */}
         <LatestBooks />
 
-        {/* How it works */}
-        <HowItWorks />
-
         {/* coverage section */}
         <Coverage></Coverage>
+
+        {/* How it works */}
+        <section id="how-it-works">
+          <HowItWorks />
+        </section>
 
         {/* animated section */}
         <BrandMarquee />
@@ -31,6 +35,9 @@ const Home = () => {
 
         {/* customer review */}
         <Testimonial />
+
+        {/* Library Owner's */}
+        <LibraryOwnerSection />
 
         {/* FAQ section */}
         <FAQ />

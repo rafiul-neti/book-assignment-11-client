@@ -25,17 +25,17 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-50 mt-3 rounded">
+    <section className="py-12 bg-gray-50 rounded">
       <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12">
           How It Works
         </h2>
 
-        <div className="flex flex-col  md:flex-row justify-between items-start gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {steps.map((step, index) => (
             <div
               key={index}
-              className="flex flex-col bg-white p-3 lg:p-5 items-center text-center md:w-1/4 rounded-md"
+              className="flex flex-col bg-white p-3 lg:p-5 items-center text-center rounded-md"
             >
               {step.icon}
               <h3 className="mt-4 text-xl font-semibold">{step.title}</h3>

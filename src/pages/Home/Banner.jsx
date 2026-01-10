@@ -67,7 +67,7 @@ const BannerSlider = () => {
                   <p className="py-8 text-lg lg:text-xl text-base-content/70 font-medium">
                     {slide.description}
                   </p>
-                  <button className="btn btn-primary btn-lg shadow-lg">
+                  <button className="btn bg-[#0b4a2a] btn-lg shadow-lg text-[#ffffff]">
                     {slide.buttonText}
                   </button>
                 </div>
