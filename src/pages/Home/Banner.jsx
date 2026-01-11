@@ -39,7 +39,7 @@ const BannerSlider = () => {
   const pagination = {
     clickable: true,
     renderBullet: function (index, className) {
-      return `<span class="${className} !w-5 !h-5 text-sm !bg-[#62ab00] !text-white flex items-center justify-center font-bold rounded-full opacity-100">${
+      return `<span class="${className} w-5! h-5! text-sm bg-[#62ab00]! text-white! flex items-center justify-center font-bold rounded-full opacity-100">${
         index + 1
       }</span>`;
     },
