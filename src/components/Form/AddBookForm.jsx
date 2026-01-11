@@ -113,7 +113,7 @@ const AddBookForm = () => {
               <textarea
                 {...register("bookDescription", { required: true })}
                 placeholder="Write book description here..."
-                className="block rounded-md focus:lime-300 w-full h-32 px-4 py-3 text-gray-800  border border-lime-300 bg-white focus:outline-[#62ab00] "
+                className="block rounded-md focus:lime-300 w-full h-32 px-4 py-3 text-gray-800 border border-lime-300 bg-white focus:outline-[#62ab00] "
               ></textarea>
               {errors.bookDescription?.type === "required" && (
                 <small className="text-[#bd0018]">

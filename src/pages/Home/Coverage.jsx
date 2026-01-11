@@ -29,10 +29,10 @@ const Coverage = () => {
   };
 
   return (
-    <section className="my-10 bg-white min-h-screen w-11/12 mx-auto p-1 md:p-3 lg:p-0 rounded-2xl">
-      <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold">
+    <section className="bg-white w-11/12 mx-auto p-1 md:p-3 lg:p-0 rounded-2xl">
+      {/* <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold">
         We are available in 64 districts
-      </h1>
+      </h1> */}
       <div className="my-5">
         <form onSubmit={handleSearch}>
           <label className="input bg-[#FAFDF0]">
@@ -65,9 +65,9 @@ const Coverage = () => {
       <div className="">
         <MapContainer
           center={position}
-          zoom={8}
+          zoom={7}
           scrollWheelZoom={false}
-          className="h-[600px]"
+          className="h-100"
           ref={searchRef}
         >
           <TileLayer
