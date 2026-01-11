@@ -40,7 +40,7 @@ const FAQ = () => {
           className="mb-2 collapse collapse-arrow bg-white border-base-300 border"
         >
           <input type="checkbox" className="clicked" />
-          <div className="collapse-title font-semibold text-[#bd0018]">
+          <div className="collapse-title font-semibold text-[#0b4a2a]">
             {queAns.query}
           </div>
 

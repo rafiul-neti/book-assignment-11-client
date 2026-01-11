@@ -24,13 +24,33 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to={`/all-books`} className={`text-lg font-medium merriweather`}>
+        <NavLink
+          to={`/all-books`}
+          className={`text-lg font-medium merriweather`}
+        >
           All Books
         </NavLink>
       </li>
+      {user && (
+        <>
+          <li>
+            <NavLink
+              to={`/dashboard`}
+              className={`text-lg font-medium merriweather`}
+            >
+              Dashboard
+            </NavLink>
+          </li>
+        </>
+      )}
       <li>
-        <NavLink to={`/dashboard`} className={`text-lg font-medium merriweather`}>
-          Dashboard
+        <NavLink to={`/faq`} className={`text-lg font-medium merriweather`}>
+          FAQ's
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to={`/contact`} className={`text-lg font-medium merriweather`}>
+          Contact
         </NavLink>
       </li>
     </>

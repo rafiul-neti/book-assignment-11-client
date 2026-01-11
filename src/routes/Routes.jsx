@@ -24,6 +24,8 @@ import MyWishlist from "../pages/Dashboard/User/MyWishlist";
 import PaymentSuccess from "../pages/Dashboard/User/PaymentSuccess";
 import PaymentCancelled from "../pages/Dashboard/User/PaymentCancelled";
 import ParcelTracking from "../pages/ParcelTracking/ParcelTracking";
+import Faq from "../pages/Faq/Faq";
+import ContactUs from "../pages/Contact/ContactUs";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +36,14 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "contact",
+        Component: ContactUs,
+      },
+      {
+        path: "faq",
+        Component: Faq,
       },
       {
         path: "/book/:id",

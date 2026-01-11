@@ -11,7 +11,7 @@ const Coverage = () => {
     axios.get("/warehouses.json").then((data) => setServiceCenters(data.data));
   }, []);
 
-//   console.log(serviceCenters);
+  //   console.log(serviceCenters);
 
   const position = [23.685, 90.3563];
 
@@ -29,7 +29,7 @@ const Coverage = () => {
   };
 
   return (
-    <section className="my-10 bg-white min-h-screen max-w-7xl mx-auto p-1 md:p-3 lg:p-16 rounded-2xl z-0">
+    <section className="my-10 bg-white min-h-screen w-11/12 mx-auto p-1 md:p-3 lg:p-0 rounded-2xl">
       <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold">
         We are available in 64 districts
       </h1>
@@ -56,7 +56,7 @@ const Coverage = () => {
               type="search"
               name="search"
               required
-              placeholder="Search here"
+              placeholder="Search by District"
             />
           </label>
         </form>
@@ -67,7 +67,7 @@ const Coverage = () => {
           center={position}
           zoom={8}
           scrollWheelZoom={false}
-          className="h-[300px]"
+          className="h-[600px]"
           ref={searchRef}
         >
           <TileLayer

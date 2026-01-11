@@ -39,15 +39,14 @@ const BannerSlider = () => {
   const pagination = {
     clickable: true,
     renderBullet: function (index, className) {
-      // Using daisyUI 'btn' classes for the numbered bullets
-      return `<span class="${className} !w-5 !h-5 text-sm !bg-primary !text-white flex items-center justify-center font-bold rounded-full opacity-100">${
+      return `<span class="${className} !w-5 !h-5 text-sm !bg-[#62ab00] !text-white flex items-center justify-center font-bold rounded-full opacity-100">${
         index + 1
       }</span>`;
     },
   };
 
   return (
-    <section className="w-full pt-28 bg-base-100 overflow-hidden relative">
+    <section className="w-full bg-base-100 overflow-hidden relative">
       <Swiper
         modules={[Autoplay, Pagination]}
         autoplay={{ delay: 5000, disableOnInteraction: false }}

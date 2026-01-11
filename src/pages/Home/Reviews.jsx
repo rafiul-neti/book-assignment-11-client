@@ -25,7 +25,7 @@ const Reviews = ({ reviewsPromise }) => {
           slideShadows: true,
         }}
         autoplay={{
-          delay: 1800,
+          delay: 2500,
           disableOnInteraction: false,
         }}
         breakpoints={{

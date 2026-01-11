@@ -1,11 +1,9 @@
 import Banner from "./Banner";
 import BrandMarquee from "./BrandMarquee";
-import Coverage from "./Coverage";
 import FAQ from "./FAQ";
 import HowItWorks from "./HowItWorks";
 import LatestBooks from "./LatestBooks";
 import LibraryOwnerSection from "./LibraryOwnerSection";
-import Partners from "./LibraryOwnerSection";
 import Testimonial from "./Testimonial";
 import WhyChoose from "./WhyChoose";
 
@@ -16,9 +14,6 @@ const Home = () => {
       <div className="max-w-7xl mx-auto p-3 lg:p-0">
         {/* latest books */}
         <LatestBooks />
-
-        {/* coverage section */}
-        <Coverage></Coverage>
 
         {/* How it works */}
         <section id="how-it-works">
