@@ -25,7 +25,7 @@ const WhyChoose = () => {
   return (
     <>
       <div className="bg-white p-2 rounded-xl">
-        <h1 className="text-center text-2xl md:text-3xl lg:text-5xl font-bold">
+        <h1 className="text-center text-2xl md:text-3xl font-bold">
           Why Choose Us
         </h1>
         <p className="mt-5 text-center">

@@ -7,7 +7,7 @@ const Testimonial = () => {
   return (
     <div className="mt-18">
       <div className="my-10">
-        <h1 className="mb-2 text-2xl md:text-3xl lg:text-5xl text-[#62ab00] font-bold text-center">
+        <h1 className="mb-2 text-2xl md:text-3xl  font-bold text-center">
           What our customers are saying
         </h1>
         <p className="text-center text-[#333333]">

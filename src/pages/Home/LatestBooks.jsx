@@ -22,7 +22,7 @@ const LatestBooks = () => {
 
   return (
     <section className="mt-18">
-      <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold text-center">
+      <h1 className="text-2xl md:text-3xl font-bold text-center">
         Latest Books
       </h1>
       <p className="text-center mt-2">
